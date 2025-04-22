@@ -1,0 +1,36 @@
+.root-layout {
+    min-height: 100vh;
+}
+
+.root-layout-header {
+    display: flex;
+    align-items: center;
+}
+
+.root-layout-header-menu{
+    flex: 1; 
+    min-width: 0;
+}
+
+.root-layout-content {
+    padding: 24x 48px
+}
+
+.root-layout-content-container{
+    min-height: 280px;
+    border-radius: 20px;
+}
+
+.root-layout-header-language{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2%;
+}
+
+.root-layout-footer{
+    text-align: center;
+}
+
+.root-logo {
+    height:80px;
+}
