@@ -1,0 +1,28 @@
+.server-rules {
+    text-align: left;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.server-rules #table-of-contents {
+    margin-bottom: 20px;
+}
+
+.server-rules #table-of-contents ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.server-rules #table-of-contents ul li a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.server-rules #table-of-contents ul li a:hover {
+    text-decoration: underline;
+}
