@@ -1,5 +1,3 @@
-import { version } from "os";
-
 const en: { [key: string]: string } = {
     submit: "Submit",
     cancel: "Cancel",
