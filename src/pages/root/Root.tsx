@@ -57,10 +57,10 @@ const Root: React.FC = () => {
             key: "Rules",
             label: messages.rule,
         },
-        // {
-        //     key: "Questionares",
-        //     label: messages.questionares,
-        // }
+        {
+            key: "Questionares",
+            label: messages.questionares,
+        }
     ]
 
     const handleMenuClick: MenuProps['onClick'] = (e) => {
