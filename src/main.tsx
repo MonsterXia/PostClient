@@ -16,12 +16,18 @@ import store from '@/store'
 import './index.css'
 
 
+if (process.env.NODE_ENV === 'production') {
+  console.warn = () => {};
+  console.error = () => {};
+  console.log = () => {};
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ConfigProvider
       theme={{
         components: {
-          Layout:{
+          Layout: {
             headerBg: '#13f0c0'
           },
           Menu: {
