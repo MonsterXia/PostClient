@@ -1,5 +1,3 @@
-import { version } from "os";
-
 const zh: { [key: string]: string } = {
     submit: "提交",
     cancel: "取消",
@@ -16,7 +14,7 @@ const zh: { [key: string]: string } = {
     faction: "阵营",
     battleGroup: "编制",
     mode: "模式",
-    version: "版本",
+    version_text: "版本",
     level: "地图",
     questionare_complete: "感谢参与调查",
     questionare_layerImprovement_title: "地图池改进",

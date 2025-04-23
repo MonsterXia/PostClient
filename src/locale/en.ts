@@ -16,7 +16,7 @@ const en: { [key: string]: string } = {
     faction: "Faction",
     battleGroup: "Battle Group",
     mode: "Mode",
-    version: "Version",
+    version_text: "Version",
     level: "Level",
     questionare_complete: "Thank you for participating in the survey",
     questionare_layerImprovement_title: "Layer Rotation Improvement",

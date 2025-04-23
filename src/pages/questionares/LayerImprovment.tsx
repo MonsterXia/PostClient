@@ -209,7 +209,7 @@ const LayerImprovment: React.FC = () => {
     const layerConvert = (layer: string) => {
         const textSlice = layer.split(" ");
         const layerSlice: string[] = textSlice[0].split("_");
-        const layerName = messages.level + ": " + levelConvert(layerSlice[0]) + " " + messages.mode + ": " + modeConvert(layerSlice[1]) + " " + messages.version + ": " + layerSlice[2] + " ";
+        const layerName = messages.level + ": " + levelConvert(layerSlice[0]) + " " + messages.mode + ": " + modeConvert(layerSlice[1]) + " " + messages.version_text + ": " + layerSlice[2] + " ";
 
         const team1 = textSlice[1].split("+");
         const team1Name = messages.faction + "1: " + conutryConvert(team1[0]) + " " + messages.battleGroup + "1: " + battleGroupConvert(team1[1]) + " ";
