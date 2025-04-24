@@ -2,22 +2,14 @@ import { request } from '@/utils'
 
 export function getLayerImprovmentFormAPI() {
     return request({
-        url: "/public/questionare/generate/layerimprovement",
+        url: "/public/questionare/layerimprovement",
         method: "get",
     });
 }
 
-export function submitBattleGroupScoreAPI(data: any) {
+export function submitLayerImprovmentFormAPI(data: any) {
     return request({
-        url: "/public/questionare/submit/battlegroup",
-        method: "post",
-        data: data,
-    });
-}
-
-export function submitLayerAcceptanceAPI(data: any) {
-    return request({
-        url: "/public/questionare/submit/layeracceptance",
+        url: "/public/questionare/layerimprovement",
         method: "post",
         data: data,
     });

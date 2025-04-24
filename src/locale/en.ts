@@ -3,6 +3,8 @@ const en: { [key: string]: string } = {
     cancel: "Cancel",
     loading: "Loading",
     primeS: "'s",
+    failed2catchData: "Failed to catch the data, please try again later.",
+    failed2submitData: "Failed to submit the data, please try again later.",
     aboutPost: "About Post",
     rule: "Rules",
     questionares: "Questionares",

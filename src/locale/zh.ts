@@ -3,6 +3,8 @@ const zh: { [key: string]: string } = {
     cancel: "取消",
     loading: "加载中",
     primeS: "的",
+    failed2catchData: "获取数据失败，请稍后再试",
+    failed2submitData: "提交数据失败，请稍后再试",
     aboutPost: "关于邮差",
     rule: "规则",
     questionares: "问卷",

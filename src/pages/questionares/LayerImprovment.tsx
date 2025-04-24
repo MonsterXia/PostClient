@@ -1,14 +1,15 @@
 import { fetchLayerImprovmentForm } from "@/utils";
 import React, { useEffect, useState } from "react";
-import { ConfigProvider, Skeleton, Card, Button, Form, InputNumber } from "antd";
+import { ConfigProvider, Skeleton, Card, Button, Form, InputNumber, message } from "antd";
 import { useSelector } from "react-redux";
 import "./LayerImprovment.css";
-import { pushBattleGroupScore, pushLayerAcceptance } from "@/utils/push";
+import { pushLayerImprovement } from "@/utils/push";
 import { useNavigate } from "react-router-dom";
 const LayerImprovment: React.FC = () => {
     const [data, setData] = useState<any>({});
     const [loading, setLoading] = useState(true);
     const { messages, locale } = useSelector((state: any) => state.language);
+    const [messageApi, contextHolder] = message.useMessage();
     const naviagte = useNavigate();
 
     useEffect(() => {
@@ -19,6 +20,10 @@ const LayerImprovment: React.FC = () => {
                 setLoading(false);
             }
         }).catch((error) => {
+            messageApi.open({
+                type: 'error',
+                content: messages.failed2catchData,
+            });
             console.error("Error fetching data:", error);
         })
     }, []);
@@ -28,7 +33,7 @@ const LayerImprovment: React.FC = () => {
     const [form] = Form.useForm();
 
     const onFinish = async (values: any) => {
-        const formPart1Values: {country: string, battle_group: string, score: number}[] = formPart1.map((item, index) => {
+        const formPart1Values: { country: string, battle_group: string, score: number }[] = formPart1.map((item, index) => {
             return {
                 "country": item.country,
                 "battle_group": item.battleGroup,
@@ -36,30 +41,28 @@ const LayerImprovment: React.FC = () => {
             };
         });
 
-        const formPart2Values: {layer: string, score: number}[] = formPart2.map((item, index) => {
+        const formPart2Values: { layer: string, score: number }[] = formPart2.map((item, index) => {
             return {
                 layer: item,
                 score: values["layer" + index] === undefined ? 50 : values["layer" + index],
             };
         });
 
-        const battlegroupPush = {
+        const data2Push = {
             "battle_group_score": formPart1Values,
-        }
-        const layeracceptancePush = {
             "battle_group_layer_score": formPart2Values,
         }
 
-        console.log(battlegroupPush);
-        console.log(layeracceptancePush);
+        const result = await pushLayerImprovement(data2Push);
 
-        const result1 = await pushBattleGroupScore(battlegroupPush);
-        const result2 = await pushLayerAcceptance(layeracceptancePush);
-
-        if (result1.status === 201 && result2.status === 201) {
+        if (result.status === 201) {
             console.log("Push success");
             naviagte("/questionares/complete");
         } else {
+            messageApi.open({
+                type: 'error',
+                content: messages.failed2submitData,
+            });
             console.log("Push failed");
         }
     };
@@ -223,11 +226,12 @@ const LayerImprovment: React.FC = () => {
         <ConfigProvider
             locale={locale}
         >
+            {contextHolder}
             <Skeleton loading={loading} active>
                 <Card title={messages.questionare_layerImprovement_title} className="questionare-layer-improvment-card">
                     <Form
                         layout="vertical"
-                        form = {form}
+                        form={form}
                         name="questionare-layer-improvment-form"
                         onFinish={onFinish}
                     >
@@ -240,7 +244,7 @@ const LayerImprovment: React.FC = () => {
                             {formPart1 !== undefined && formPart1.map((item, index) => (
                                 <Form.Item
                                     key={"questionare_layerImprovement_formPart1_" + index}
-                                    name={"battleGroup_"+index}
+                                    name={"battleGroup_" + index}
                                     label={conutryConvert(item.country) + messages.primeS + " " + battleGroupConvert(item.battleGroup)}
                                 >
                                     <InputNumber
@@ -260,7 +264,7 @@ const LayerImprovment: React.FC = () => {
                             {formPart2 !== undefined && formPart2.map((item, index) => (
                                 <Form.Item
                                     key={"questionare_layerImprovement_formPart2_" + index}
-                                    name={"layer"+index}
+                                    name={"layer" + index}
                                     label={layerConvert(item)}
                                 >
                                     <InputNumber
