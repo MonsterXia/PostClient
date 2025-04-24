@@ -18,6 +18,7 @@ const LayerImprovment: React.FC = () => {
             if (res.status === 200) {
                 setData(res.data.message)
                 setLoading(false);
+                console.log(res.data.message);
             }
         }).catch((error) => {
             messageApi.open({
@@ -81,7 +82,7 @@ const LayerImprovment: React.FC = () => {
                 return messages.questionare_layerImprovement_country_USMC;
             case "IMF":
                 return messages.questionare_layerImprovement_country_IMF;
-            case "INS":
+            case "MEI":
                 return messages.questionare_layerImprovement_country_INS;
             case "MEA":
                 return messages.questionare_layerImprovement_country_MEA;
