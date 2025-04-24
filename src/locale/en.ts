@@ -1,87 +1,18 @@
-const en: { [key: string]: string } = {
-    submit: "Submit",
-    cancel: "Cancel",
-    loading: "Loading",
-    primeS: "'s",
-    failed2catchData: "Failed to catch the data, please try again later.",
-    failed2submitData: "Failed to submit the data, please try again later.",
-    aboutPost: "About Post",
-    rule: "Rules",
-    questionares: "Questionares",
-    changeLanguage: "Change Language",
-    post: "Post",
-    allRightsReserved: "All Rights Reserved",
-    backhome: "Back Home",
-    fallback404Tips: "Sorry, the page you visited does not exist.",
-    faction: "Faction",
-    battleGroup: "Battle Group",
-    mode: "Mode",
-    version_text: "Version",
-    level: "Level",
-    questionare_complete: "Thank you for participating in the survey",
-    questionare_layerImprovement_title: "Layer Rotation Improvement",
-    questionare_layerImprovement_subtitle1: "Faction Strength Rating",
-    questionare_layerImprovement_subtitle2: "Layer Acceptability Rating",
-    questionare_layerImprovement_description1: "In this section, please rate the strength of the battle group you have in mind for this country, with a score range of 0 to 100.",
-    questionare_layerImprovement_description2: "In this section, please rate whether you can accept the two battle groups as both sides of the layer in your impression, with a score range of 0 to 100.",
-    questionare_layerImprovement_country_ADF: "Australian Defence Force",
-    questionare_layerImprovement_country_BAF: "British Armed Forces",
-    questionare_layerImprovement_country_CAF: "Canadian Armed Forces",
-    questionare_layerImprovement_country_USA: "United States Army",
-    questionare_layerImprovement_country_USMC: "United States Marine Corps",
-    questionare_layerImprovement_country_IMF: "Irregular Militia Forces",
-    questionare_layerImprovement_country_INS: "Middle Eastern Insurgents",
-    questionare_layerImprovement_country_MEA: "Middle Eastern Alliance",
-    questionare_layerImprovement_country_TLF: "Turkish Land Forces",
-    questionare_layerImprovement_country_WPMC: "Western Private Military Contractors",
-    questionare_layerImprovement_country_PLA: "People's Liberation Army",
-    questionare_layerImprovement_country_PLAAGF: "PLA Amphibious Ground Force",
-    questionare_layerImprovement_country_PLANMC: "PLA Navy Marine Corps",
-    questionare_layerImprovement_country_RGF: "Russian Ground Forces",
-    questionare_layerImprovement_country_VDV: "Russian Airborne Forces",
-    questionare_layerImprovement_mode_AAS: "Advance and Secure",
-    questionare_layerImprovement_mode_RAAS: "Random Advance and Secure",
-    questionare_layerImprovement_mode_Skirmish: "Skirmish",
-    questionare_layerImprovement_mode_Invasion: "Invasion",
-    questionare_layerImprovement_mode_Destruction: "Destruction",
-    questionare_layerImprovement_mode_Insurgency: "Insurgency",
-    questionare_layerImprovement_mode_TerritoryControl: "Territory Control",
-    questionare_layerImprovement_mode_Seed: "Seed",
-    questionare_layerImprovement_level_AlBasrah: "Al Basrah",
-    questionare_layerImprovement_level_Anvil: "Anvil",
-    questionare_layerImprovement_level_BelayaPass: "Belaya Pass",
-    questionare_layerImprovement_level_BlackCoast: "Black Coast",
-    questionare_layerImprovement_level_Chora: "Chora",
-    questionare_layerImprovement_level_Fallujah: "Fallujah",
-    questionare_layerImprovement_level_FoolsRoad: "Fool's Road",
-    questionare_layerImprovement_level_GooseBay: "Goose Bay",
-    questionare_layerImprovement_level_Gorodok: "Gorodok",
-    questionare_layerImprovement_level_Harju: "Harju",
-    questionare_layerImprovement_level_JensensRange: "Jensen's Range",
-    questionare_layerImprovement_level_KamdeshHighlands: "Kamdesh Highlands",
-    questionare_layerImprovement_level_KohatToi: "Kohat Toi",
-    questionare_layerImprovement_level_Kokan: "Kokan",
-    questionare_layerImprovement_level_LashkarValley: "Lashkar Valley",
-    questionare_layerImprovement_level_LogarValley: "Logar Valley",
-    questionare_layerImprovement_layer_Manicouagan: "Manicouagan",
-    questionare_layerImprovement_level_Mestia: "Mestia",
-    questionare_layerImprovement_level_Mutaha: "Mutaha",
-    questionare_layerImprovement_level_Narva: "Narva",
-    questionare_layerImprovement_level_PacificProvingGrounds: "Pacific Proving Grounds",
-    questionare_layerImprovement_level_Sanxian: "Sanxian",
-    questionare_layerImprovement_level_Skorpo: "Skorpo",
-    questionare_layerImprovement_level_SumariBala: "Sumari Bala",
-    questionare_layerImprovement_level_TallilOutskirts: "Tallil Outskirts",
-    questionare_layerImprovement_level_Yehorivka: "Yehorivka",
-    questionare_layerImprovement_battleGroup_AirAssault: "Air Assault",
-    questionare_layerImprovement_battleGroup_Armored: "Armored",
-    questionare_layerImprovement_battleGroup_CombinedArms: "Combined Arms",
-    questionare_layerImprovement_battleGroup_LightInfantry: "LightInfantry",
-    questionare_layerImprovement_battleGroup_Mechanized: "Mechanized",
-    questionare_layerImprovement_battleGroup_Motorized: "Motorized",
-    questionare_layerImprovement_battleGroup_Support: "Support",
-    questionare_layerImprovement_battleGroup_AmphibiousAssault: "Amphibious Assault",
+import locale from './locale.json';
+
+type LocaleType = {
+  [key: string]: {
+    en: string;
+    zh: string;
+  };
 };
+
+const typedLocale = locale as LocaleType;
+
+const en: { [key: string]: string } = Object.keys(typedLocale).reduce((acc, key) => {
+  acc[key] = typedLocale[key].en;
+  return acc;
+}, {} as { [key: string]: string });
 
 export default en;
 

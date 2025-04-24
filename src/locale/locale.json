@@ -1,0 +1,333 @@
+{
+    "submit": {
+        "en": "Submit",
+        "zh": "提交"
+    },
+    "cancel": {
+        "en": "Cancel",
+        "zh": "取消"
+    },
+    "loading": {
+        "en": "Loading",
+        "zh": "加载中"
+    },
+    "primeS": {
+        "en": "'s",
+        "zh": "的"
+    },
+    "failed2catchData": {
+        "en": "Failed to catch the data, please try again later.",
+        "zh": "获取数据失败，请稍后再试。"
+    },
+    "failed2submitData": {
+        "en": "Failed to submit the data, please try again later.",
+        "zh": "提交数据失败，请稍后再试。"
+    },
+    "aboutPost": {
+        "en": "About Post",
+        "zh": "关于邮差"
+    },
+    "rule": {
+        "en": "Rules",
+        "zh": "规则"
+    },
+    "questionares": {
+        "en": "Questionares",
+        "zh": "问卷"
+    },
+    "changeLanguage": {
+        "en": "Change Language",
+        "zh": "切换语言"
+    },
+    "post": {
+        "en": "Post",
+        "zh": "邮差"
+    },
+    "allRightsReserved": {
+        "en": "All rights reserved",
+        "zh": "版权所有"
+    },
+    "backhome": {
+        "en": "Back Home",
+        "zh": "返回首页"
+    },
+    "fallback404Tips": {
+        "en": "Sorry, the page you visited does not exist.",
+        "zh": "抱歉，您访问的页面不存在。"
+    },
+    "faction": {
+        "en": "Faction",
+        "zh": "阵营"
+    },
+    "battleGroup": {
+        "en": "Battle Group",
+        "zh": "编制"
+    },
+    "mode": {
+        "en": "Mode",
+        "zh": "模式"
+    },
+    "version_text": {
+        "en": "Version",
+        "zh": "版本"
+    },
+    "level": {
+        "en": "Level",
+        "zh": "地图"
+    },
+    "questionare_complete": {
+        "en": "Thank you for participating in the survey",
+        "zh": "感谢参与调查"
+    },
+    "questionare_layerImprovement_title": {
+        "en": "Layer Rotation Improvement",
+        "zh": "地图池改进"
+    },
+    "questionare_layerImprovement_subtitle1": {
+        "en": "Faction Strength Rating",
+        "zh": "阵营强度评分"
+    },
+    "questionare_layerImprovement_subtitle2": {
+        "en": "Layer Acceptability Rating",
+        "zh": "地图可接受度评分"
+    },
+    "questionare_layerImprovement_description1": {
+        "en": "In this section, please rate the strength of the battle group you have in mind for this country, with a score range of 0 to 100.",
+        "zh": "在这个部分中，请对你印象中的该国家的该部队强度进行评分, 分值范围0 ~ 100。"
+    },
+    "questionare_layerImprovement_description2": {
+        "en": "In this section, please rate whether you can accept the two battle groups as both sides of the layer in your impression, with a score range of 0 to 100.",
+        "zh": "在这个部分中, 请对你印象中该地图下如果这两个部队作为阵营双方你是否可以接受进行评分, 分值范围0 ~ 100。"
+    },
+    "questionare_layerImprovement_country_ADF": {
+        "en": "Australian Defence Force",
+        "zh": "澳大利亚国防军"
+    },
+    "questionare_layerImprovement_country_BAF": {
+        "en": "British Armed Forces",
+        "zh": "英国武装部队"
+    },
+    "questionare_layerImprovement_country_CAF": {
+        "en": "Canadian Armed Forces",
+        "zh": "加拿大武装部队"
+    },
+    "questionare_layerImprovement_country_USA": {
+        "en": "United States Army",
+        "zh": "美国陆军"
+    },
+    "questionare_layerImprovement_country_USMC": {
+        "en": "United States Marine Corps",
+        "zh": "美国海军陆战队"
+    },
+    "questionare_layerImprovement_country_IMF": {
+        "en": "Irregular Militia Forces",
+        "zh": "非正规民兵部队"
+    },
+    "questionare_layerImprovement_country_INS": {
+        "en": "Middle Eastern Insurgents",
+        "zh": "中东叛乱分子"
+    },
+    "questionare_layerImprovement_country_MEA": {
+        "en": "Middle Eastern Alliance",
+        "zh": "中东联盟"
+    },
+    "questionare_layerImprovement_country_TLF": {
+        "en": "Turkish Land Forces",
+        "zh": "土耳其陆军"
+    },
+    "questionare_layerImprovement_country_WPMC": {
+        "en": "Western Private Military Contractors",
+        "zh": "西方私人军事承包商"
+    },
+    "questionare_layerImprovement_country_PLA": {
+        "en": "People's Liberation Army",
+        "zh": "中国人民解放军"
+    },
+    "questionare_layerImprovement_country_PLAAGF": {
+        "en": "PLA Amphibious Ground Force",
+        "zh": "中国人民解放军两栖陆军"
+    },
+    "questionare_layerImprovement_country_PLANMC": {
+        "en": "PLA Navy Marine Corps",
+        "zh": "中国人民解放军海军陆战队"
+    },
+    "questionare_layerImprovement_country_RGF": {
+        "en": "Russian Ground Forces",
+        "zh": "俄罗斯陆军"
+    },
+    "questionare_layerImprovement_country_VDV": {
+        "en": "Russian Airborne Forces",
+        "zh": "俄罗斯空降兵"
+    },
+    "questionare_layerImprovement_mode_AAS": {
+        "en": "Advance and Secure",
+        "zh": "推进与控制"
+    },
+    "questionare_layerImprovement_mode_RAAS": {
+        "en": "Random Advance and Secure",
+        "zh": "随机推进与控制"
+    },
+    "questionare_layerImprovement_mode_Skirmish": {
+        "en": "Skirmish",
+        "zh": "小规模冲突"
+    },
+    "questionare_layerImprovement_mode_Invasion": {
+        "en": "Invasion",
+        "zh": "入侵"
+    },
+    "questionare_layerImprovement_mode_Destruction": {
+        "en": "Destruction",
+        "zh": "毁灭"
+    },
+    "questionare_layerImprovement_mode_Insurgency": {
+        "en": "Insurgency",
+        "zh": "叛乱"
+    },
+    "questionare_layerImprovement_mode_TerritoryControl": {
+        "en": "Territory Control",
+        "zh": "领土控制"
+    },
+    "questionare_layerImprovement_mode_Seed": {
+        "en": "Seed",
+        "zh": "种子"
+    },
+    "questionare_layerImprovement_level_AlBasrah": {
+        "en": "Al Basrah",
+        "zh": "巴士拉"
+    },
+    "questionare_layerImprovement_level_Anvil": {
+        "en": "Anvil",
+        "zh": "铁砧"
+    },
+    "questionare_layerImprovement_level_BelayaPass": {
+        "en": "Belaya Pass",
+        "zh": "贝拉亚山口"
+    },
+    "questionare_layerImprovement_level_BlackCoast": {
+        "en": "Black Coast",
+        "zh": "黑色海岸"
+    },
+    "questionare_layerImprovement_level_Chora": {
+        "en": "Chora",
+        "zh": "乔拉"
+    },
+    "questionare_layerImprovement_level_Fallujah": {
+        "en": "Fallujah",
+        "zh": "费卢杰"
+    },
+    "questionare_layerImprovement_level_FoolsRoad": {
+        "en": "Fool's Road",
+        "zh": "傻瓜之路"
+    },
+    "questionare_layerImprovement_level_GooseBay": {
+        "en": "Goose Bay",
+        "zh": "鹅湾"
+    },
+    "questionare_layerImprovement_level_Gorodok": {
+        "en": "Gorodok",
+        "zh": "格鲁多克"
+    },
+    "questionare_layerImprovement_level_Harju": {
+        "en": "Harju",
+        "zh": "哈留"
+    },
+    "questionare_layerImprovement_level_JensensRange": {
+        "en": "Jensen's Range",
+        "zh": "延森训练场"
+    },
+    "questionare_layerImprovement_level_KamdeshHighlands": {
+        "en": "Kamdesh Highlands",
+        "zh": "卡姆德什高地"
+    },
+    "questionare_layerImprovement_level_KohatToi": {
+        "en": "Kohat Toi",
+        "zh": "科哈特"
+    },
+    "questionare_layerImprovement_level_Kokan": {
+        "en": "Kokan",
+        "zh": "寇坎"
+    },
+    "questionare_layerImprovement_level_LashkarValley": {
+        "en": "Lashkar Valley",
+        "zh": "拉什卡谷"
+    },
+    "questionare_layerImprovement_level_LogarValley": {
+        "en": "Logar Valley",
+        "zh": "罗杰尔谷"
+    },
+    "questionare_layerImprovement_layer_Manicouagan": {
+        "en": "Manicouagan",
+        "zh": "曼尼古根"
+    },
+    "questionare_layerImprovement_level_Mestia": {
+        "en": "Mestia",
+        "zh": "梅斯季亚"
+    },
+    "questionare_layerImprovement_level_Mutaha": {
+        "en": "Mutaha",
+        "zh": "穆塔哈"
+    },
+    "questionare_layerImprovement_level_Narva": {
+        "en": "Narva",
+        "zh": "纳尔瓦"
+    },
+    "questionare_layerImprovement_level_PacificProvingGrounds": {
+        "en": "Pacific Proving Grounds",
+        "zh": "太平洋训练场"
+    },
+    "questionare_layerImprovement_level_Sanxian": {
+        "en": "Sanxian Islands",
+        "zh": "三贤岛"
+    },
+    "questionare_layerImprovement_level_Skorpo": {
+        "en": "Skorpo",
+        "zh": "斯科珀"
+    },
+    "questionare_layerImprovement_level_SumariBala": {
+        "en": "Sumari Bala",
+        "zh": "索马里"
+    },
+    "questionare_layerImprovement_level_TallilOutskirts": {
+        "en": "Tallil Outskirts",
+        "zh": "塔利尔郊区"
+    },
+    "questionare_layerImprovement_level_Yehorivka": {
+        "en": "Yehorivka",
+        "zh": "叶霍里符卡"
+    },
+    "questionare_layerImprovement_battleGroup_AirAssault": {
+        "en": "Air Assault",
+        "zh": "空中突击"
+    },
+    "questionare_layerImprovement_battleGroup_Armored": {
+        "en": "Armored",
+        "zh": "装甲"
+    },
+    "questionare_layerImprovement_battleGroup_CombinedArms": {
+        "en": "Combined Arms",
+        "zh": "联合武器"
+    },
+    "questionare_layerImprovement_battleGroup_LightInfantry": {
+        "en": "Light Infantry",
+        "zh": "轻步兵"
+    },
+    "questionare_layerImprovement_battleGroup_Mechanized": {
+        "en": "Mechanized",
+        "zh": "机械化"
+    },
+    "questionare_layerImprovement_battleGroup_Motorized": {
+        "en": "Motorized",
+        "zh": "机动化"
+    },
+    "questionare_layerImprovement_battleGroup_Support": {
+        "en": "Support",
+        "zh": "支援"
+    },
+    "questionare_layerImprovement_battleGroup_AmphibiousAssault": {
+        "en": "Amphibious Assault",
+        "zh": "两栖突击"
+    }
+}
+
+
+    
