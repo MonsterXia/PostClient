@@ -109,7 +109,7 @@
     },
     "questionare_layerImprovement_country_CAF": {
         "en": "Canadian Armed Forces",
-        "zh": "加拿大武装部队"
+        "zh": "加拿大陆军"
     },
     "questionare_layerImprovement_country_USA": {
         "en": "United States Army",
@@ -121,19 +121,19 @@
     },
     "questionare_layerImprovement_country_IMF": {
         "en": "Irregular Militia Forces",
-        "zh": "非正规民兵部队"
+        "zh": "非正规军民兵"
     },
     "questionare_layerImprovement_country_INS": {
         "en": "Middle Eastern Insurgents",
-        "zh": "中东叛乱分子"
+        "zh": "中东叛军"
     },
     "questionare_layerImprovement_country_MEA": {
         "en": "Middle Eastern Alliance",
-        "zh": "中东联盟"
+        "zh": "中东联军"
     },
     "questionare_layerImprovement_country_TLF": {
         "en": "Turkish Land Forces",
-        "zh": "土耳其陆军"
+        "zh": "土耳其陆军部队"
     },
     "questionare_layerImprovement_country_WPMC": {
         "en": "Western Private Military Contractors",
@@ -145,39 +145,39 @@
     },
     "questionare_layerImprovement_country_PLAAGF": {
         "en": "PLA Amphibious Ground Force",
-        "zh": "中国人民解放军两栖陆军"
+        "zh": "中华人民解放军两栖作战部队"
     },
     "questionare_layerImprovement_country_PLANMC": {
         "en": "PLA Navy Marine Corps",
-        "zh": "中国人民解放军海军陆战队"
+        "zh": "中华人民解放军海军陆战队"
     },
     "questionare_layerImprovement_country_RGF": {
         "en": "Russian Ground Forces",
-        "zh": "俄罗斯陆军"
+        "zh": "俄罗斯地面部队"
     },
     "questionare_layerImprovement_country_VDV": {
         "en": "Russian Airborne Forces",
-        "zh": "俄罗斯空降兵"
+        "zh": "俄罗斯空降部队"
     },
     "questionare_layerImprovement_mode_AAS": {
         "en": "Advance and Secure",
-        "zh": "推进与控制"
+        "zh": "有序攻守"
     },
     "questionare_layerImprovement_mode_RAAS": {
         "en": "Random Advance and Secure",
-        "zh": "随机推进与控制"
+        "zh": "随机攻防"
     },
     "questionare_layerImprovement_mode_Skirmish": {
         "en": "Skirmish",
-        "zh": "小规模冲突"
+        "zh": "遭遇战"
     },
     "questionare_layerImprovement_mode_Invasion": {
         "en": "Invasion",
-        "zh": "入侵"
+        "zh": "侵攻"
     },
     "questionare_layerImprovement_mode_Destruction": {
         "en": "Destruction",
-        "zh": "毁灭"
+        "zh": "摧毁"
     },
     "questionare_layerImprovement_mode_Insurgency": {
         "en": "Insurgency",
@@ -189,7 +189,7 @@
     },
     "questionare_layerImprovement_mode_Seed": {
         "en": "Seed",
-        "zh": "种子"
+        "zh": "暖服"
     },
     "questionare_layerImprovement_level_AlBasrah": {
         "en": "Al Basrah",
@@ -205,7 +205,7 @@
     },
     "questionare_layerImprovement_level_BlackCoast": {
         "en": "Black Coast",
-        "zh": "黑色海岸"
+        "zh": "黑海"
     },
     "questionare_layerImprovement_level_Chora": {
         "en": "Chora",
@@ -217,7 +217,7 @@
     },
     "questionare_layerImprovement_level_FoolsRoad": {
         "en": "Fool's Road",
-        "zh": "傻瓜之路"
+        "zh": "愚者之路"
     },
     "questionare_layerImprovement_level_GooseBay": {
         "en": "Goose Bay",
@@ -225,7 +225,7 @@
     },
     "questionare_layerImprovement_level_Gorodok": {
         "en": "Gorodok",
-        "zh": "格鲁多克"
+        "zh": "格罗多克"
     },
     "questionare_layerImprovement_level_Harju": {
         "en": "Harju",
@@ -233,11 +233,11 @@
     },
     "questionare_layerImprovement_level_JensensRange": {
         "en": "Jensen's Range",
-        "zh": "延森训练场"
+        "zh": "詹森训练场"
     },
     "questionare_layerImprovement_level_KamdeshHighlands": {
         "en": "Kamdesh Highlands",
-        "zh": "卡姆德什高地"
+        "zh": "卡姆德仕高原"
     },
     "questionare_layerImprovement_level_KohatToi": {
         "en": "Kohat Toi",
@@ -253,7 +253,7 @@
     },
     "questionare_layerImprovement_level_LogarValley": {
         "en": "Logar Valley",
-        "zh": "罗杰尔谷"
+        "zh": "洛加山谷"
     },
     "questionare_layerImprovement_layer_Manicouagan": {
         "en": "Manicouagan",
@@ -261,11 +261,11 @@
     },
     "questionare_layerImprovement_level_Mestia": {
         "en": "Mestia",
-        "zh": "梅斯季亚"
+        "zh": "梅斯提亚"
     },
     "questionare_layerImprovement_level_Mutaha": {
         "en": "Mutaha",
-        "zh": "穆塔哈"
+        "zh": "木塔哈"
     },
     "questionare_layerImprovement_level_Narva": {
         "en": "Narva",
@@ -277,11 +277,11 @@
     },
     "questionare_layerImprovement_level_Sanxian": {
         "en": "Sanxian Islands",
-        "zh": "三贤岛"
+        "zh": "三鲜岛"
     },
     "questionare_layerImprovement_level_Skorpo": {
         "en": "Skorpo",
-        "zh": "斯科珀"
+        "zh": "斯科普"
     },
     "questionare_layerImprovement_level_SumariBala": {
         "en": "Sumari Bala",
@@ -293,11 +293,11 @@
     },
     "questionare_layerImprovement_level_Yehorivka": {
         "en": "Yehorivka",
-        "zh": "叶霍里符卡"
+        "zh": "叶霍里夫卡"
     },
     "questionare_layerImprovement_battleGroup_AirAssault": {
         "en": "Air Assault",
-        "zh": "空中突击"
+        "zh": "空突"
     },
     "questionare_layerImprovement_battleGroup_Armored": {
         "en": "Armored",
@@ -305,7 +305,7 @@
     },
     "questionare_layerImprovement_battleGroup_CombinedArms": {
         "en": "Combined Arms",
-        "zh": "联合武器"
+        "zh": "合成营"
     },
     "questionare_layerImprovement_battleGroup_LightInfantry": {
         "en": "Light Infantry",
@@ -317,7 +317,7 @@
     },
     "questionare_layerImprovement_battleGroup_Motorized": {
         "en": "Motorized",
-        "zh": "机动化"
+        "zh": "摩托化"
     },
     "questionare_layerImprovement_battleGroup_Support": {
         "en": "Support",
