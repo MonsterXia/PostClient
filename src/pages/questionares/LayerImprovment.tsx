@@ -10,6 +10,7 @@ const LayerImprovment: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const { messages, locale } = useSelector((state: any) => state.language);
     const [messageApi, contextHolder] = message.useMessage();
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const naviagte = useNavigate();
 
     useEffect(() => {
@@ -34,6 +35,12 @@ const LayerImprovment: React.FC = () => {
     const [form] = Form.useForm();
 
     const onFinish = async (values: any) => {
+        setIsSubmitting(true);
+        messageApi.open({
+            type: 'warning',
+            content: messages.submitting,
+        });
+
         const formPart1Values: { country: string, battle_group: string, score: number }[] = formPart1.map((item, index) => {
             return {
                 "country": item.country,
@@ -64,6 +71,7 @@ const LayerImprovment: React.FC = () => {
                 type: 'error',
                 content: messages.failed2submitData,
             });
+            setIsSubmitting(false);
             console.log("Push failed");
         }
     };
@@ -277,7 +285,7 @@ const LayerImprovment: React.FC = () => {
                             ))}
                         </Card>
                         <Form.Item>
-                            <Button type="primary" htmlType="submit">
+                            <Button type="primary" htmlType="submit" disabled={isSubmitting}>
                                 {messages.submit}
                             </Button>
                         </Form.Item>
