@@ -90,7 +90,7 @@ const LayerImprovment: React.FC = () => {
                 return messages.questionare_layerImprovement_country_USMC;
             case "IMF":
                 return messages.questionare_layerImprovement_country_IMF;
-            case "MEI":
+            case "INS":
                 return messages.questionare_layerImprovement_country_INS;
             case "MEA":
                 return messages.questionare_layerImprovement_country_MEA;
