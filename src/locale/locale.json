@@ -35,13 +35,17 @@
         "en": "Rules",
         "zh": "规则"
     },
+    "server": {
+        "en": "Server",
+        "zh": "服务器"
+    },
     "questionares": {
         "en": "Questionares",
         "zh": "问卷"
     },
     "changeLanguage": {
-        "en": "Change Language",
-        "zh": "切换语言"
+        "en": "切换语言",
+        "zh": "Change Language"
     },
     "post": {
         "en": "Post",
@@ -58,6 +62,166 @@
     "fallback404Tips": {
         "en": "Sorry, the page you visited does not exist.",
         "zh": "抱歉，您访问的页面不存在。"
+    },
+    "serverAdminAccount": {
+        "en": "Server Admin Account",
+        "zh": "服务器管理员账号"
+    },
+    "signIn": {
+        "en": "Sign In",
+        "zh": "登录"
+    },
+    "plzFinishSliderVerification": {
+        "en": "Please finish the slider verification",
+        "zh": "请完成滑动验证"
+    },
+    "emailFormatError": {
+        "en": "Email format error",
+        "zh": "邮箱格式错误"
+    },
+    "serverError": {
+        "en": "Server Error",
+        "zh": "服务器错误"
+    },
+    "emailAlreadyExists": {
+        "en": "Email already exists",
+        "zh": "邮箱已存在"
+    },
+    "registerSuccess": {
+        "en": "Register Success",
+        "zh": "注册成功"
+    },
+    "registerPendingForVerification": {
+        "en": "Register Pending for Verification",
+        "zh": "注册待验证"
+    },
+    "registerSuccessTips": {
+        "en": "Register Success, please check your email in-box in 30 mins to activate your account.",
+        "zh": "注册成功，请在30分钟内检查您的邮箱以激活您的账号。"
+    },
+    "registerSuccessVerificationTips": {
+        "en": "Register Success, please contact the supervisor to activate your account.",
+        "zh": "注册成功，请联系管理员激活您的账号。"
+    },
+    "registerFailed": {
+        "en": "Register Failed",
+        "zh": "注册失败"
+    },
+    "registerFailedTips": {
+        "en": "Register Failed, your email is not in the stage of verification.",
+        "zh": "注册失败，您的邮箱不在验证阶段。"
+    },
+    "backToLogin": {
+        "en": "Back to Login",
+        "zh": "返回登录"
+    },
+    "otherLoginOptions": {
+        "en": "Other Login Options",
+        "zh": "其他登录选项"
+    },
+    "dragButtonToRight": {
+        "en": "Drag the button to the right",
+        "zh": "将按钮拖到右侧"
+    },
+    "verificationSuccess": {
+        "en": "Verification Success",
+        "zh": "验证成功"
+    },
+    "verificationFailed": {
+        "en": "Verification Failed, please try again.",
+        "zh": "验证失败，请重试。"
+    },
+    "confirmPassword": {
+        "en": "Confirm Password",
+        "zh": "确认密码"
+    },
+    "plzConfirmPassword": {
+        "en": "Please confirm your password",
+        "zh": "请确认您的密码"
+    },
+    "passwordsDoNotMatch": {
+        "en": "Passwords do not match",
+        "zh": "密码不匹配"
+    },
+    "passwordLogin": {
+        "en": "Password Login",
+        "zh": "密码登录"
+    },
+    "OTPLogin": {
+        "en": "OTP Login",
+        "zh": "验证码登录"
+    },
+    "email": {
+        "en": "Email",
+        "zh": "邮箱"
+    },
+    "password": {
+        "en": "Password",
+        "zh": "密码"
+    },
+    "strength": {
+        "en": "Strength",
+        "zh": "强度"
+    },
+    "strong": {
+        "en": "Strong",
+        "zh": "强"
+    },
+    "weak": {
+        "en": "Weak",
+        "zh": "弱"
+    },
+    "medium": {
+        "en": "medium",
+        "zh": "中"
+    },
+    "forgotPassword": {
+        "en": "Forgot Password",
+        "zh": "忘记密码"
+    },
+    "strongPasswordTips": {
+        "en": "Strong password should contain numbers, letters and special characters, at least 12 characters long.",
+        "zh": "强密码应包含数字、字母和特殊字符，至少12个字符长。"
+    },
+    "OTP": {
+        "en": "OTP",
+        "zh": "验证码"
+    },
+    "plzEnterYourEmail": {
+        "en": "Please enter your email",
+        "zh": "请输入您的邮箱"
+    },
+    "plzEnterYourPassword": {
+        "en": "Please enter your password",
+        "zh": "请输入您的密码"
+    },
+    "plzEnterYourOTP": {
+        "en": "Please enter your OTP",
+        "zh": "请输入您的验证码"
+    },
+    "passwordNotLessThan6": {
+        "en": "Password should not be less than 6 characters",
+        "zh": "密码长度不能少于6个字符"
+    },
+    "getOTP": {
+        "en": "Get OTP",
+        "zh": "获取验证码"
+    },
+    "reGetOTP": {
+        "en": "Re-get OTP in",
+        "zh": "重新获取验证码"
+    },
+    "seconds": {
+        "en": "s",
+        "zh": "秒"
+    },
+    "noAccount": {
+        "en": "No account?",
+        "zh": "没有账号？"
+    },
+    "signUp": {
+        "en": "Sign Up",
+        "zh": "注册"
     },
     "faction": {
         "en": "Faction",

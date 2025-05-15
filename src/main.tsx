@@ -17,9 +17,9 @@ import './index.css'
 
 
 if (process.env.NODE_ENV === 'production') {
-  console.warn = () => {};
-  console.error = () => {};
-  console.log = () => {};
+  console.warn = () => { };
+  console.error = () => { };
+  console.log = () => { };
 }
 
 createRoot(document.getElementById('root')!).render(
@@ -39,7 +39,7 @@ createRoot(document.getElementById('root')!).render(
       }}
     >
       <Provider store={store}>
-        <RouterProvider router={router} />
+          <RouterProvider router={router} />
       </Provider>
     </ConfigProvider>
   </StrictMode>,

@@ -59,6 +59,10 @@ const Root: React.FC = () => {
             label: messages.rule,
         },
         {
+            key: "server",
+            label: messages.server,
+        },
+        {
             key: "questionares",
             label: messages.questionares,
         }
@@ -72,6 +76,9 @@ const Root: React.FC = () => {
                 break;
             case "rules":
                 navigate("/rules");
+                break;
+            case "server":
+                navigate("/server");
                 break;
             case "questionares":
                 navigate("/questionares");
@@ -93,11 +100,17 @@ const Root: React.FC = () => {
                     <Menu
                         mode="horizontal"
                         defaultSelectedKeys={["About Us"]}
-                        selectedKeys={[location.pathname.split("/")[1] === ""? "/" : location.pathname.split("/")[1]]}
+                        selectedKeys={[location.pathname.split("/")[1] === "" ? "/" : location.pathname.split("/")[1]]}
                         items={menuItems}
                         className="root-layout-header-menu"
                         onClick={handleMenuClick}
                     />
+                    {/* <SignedOut>
+                        <SignInButton/>
+                    </SignedOut>
+                    <SignedIn>
+                        <UserButton />
+                    </SignedIn> */}
                 </Header>
                 <Content className='root-layout-content'>
                     <div
