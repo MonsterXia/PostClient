@@ -95,9 +95,9 @@
         "en": "Register Pending for Verification",
         "zh": "注册待验证"
     },
-    "registerSuccessTips": {
-        "en": "Register Success, please check your email in-box in 30 mins to activate your account.",
-        "zh": "注册成功，请在30分钟内检查您的邮箱以激活您的账号。"
+    "registerPendingForVerificationTips": {
+        "en": "Register Pending for Verification, please check your email in-box in 30 mins to activate your account.",
+        "zh": "注册待验证，请在30分钟内检查您的邮箱以激活您的账号。"
     },
     "registerSuccessVerificationTips": {
         "en": "Register Success, please contact the supervisor to activate your account.",
