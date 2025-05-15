@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React from "react";
 const ServerIndex: React.FC = () => {
   return (
     <div>
