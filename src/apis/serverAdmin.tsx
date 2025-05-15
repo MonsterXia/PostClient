@@ -36,5 +36,6 @@ export function serverAdminLoginAPI(data: any) {
         url: "/admin/login",
         method: "post",
         data: data,
+        withCredentials: true,
     });
 }
