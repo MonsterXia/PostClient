@@ -1,4 +1,4 @@
-import { getLayerImprovmentFormAPI, serverAdminRegisterAPI, serverAdminRegisterValidationAPI, usernameCheckAPI } from "@/apis";
+import { getLayerImprovmentFormAPI, serverAdminLoginAPI, serverAdminRegisterAPI, serverAdminRegisterValidationAPI, usernameCheckAPI } from "@/apis";
 
 export const fetchLayerImprovmentForm = async () => {
   const res = await getLayerImprovmentFormAPI();
@@ -17,5 +17,10 @@ export const fetchServerAdminRegister = async (data: any) => {
 
 export const fetchServerAdminRegisterValidation = async (data: any) => {
   const res = await serverAdminRegisterValidationAPI(data);
+  return res;
+};
+
+export const fetchServerAdminLogin = async (data: any) => {
+  const res = await serverAdminLoginAPI(data);
   return res;
 };

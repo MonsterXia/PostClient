@@ -12,13 +12,14 @@ import {
 import { Space, Tabs, message, theme, ConfigProvider, Button } from 'antd';
 // import type { CSSProperties } from 'react';
 import { useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import SliderCaptcha, { ActionType } from 'rc-slider-captcha';
 
 import "./ServerAdminLogin.css"
-import { fetchAdminEmailCheck, fetchServerAdminRegister } from '@/utils';
+import { fetchAdminEmailCheck, fetchServerAdminLogin, fetchServerAdminRegister, setToken } from '@/utils';
 import emailRegex from 'email-regex';
 import { useNavigate } from 'react-router-dom';
+import { setAdminInfo, setAdminToken } from '@/store/modules/Admin';
 
 type LoginType = 'sign_in' | 'sign_up';
 
@@ -32,6 +33,7 @@ const ServerAdminLogin: React.FC = () => {
     const [messageApi, contextHolder] = message.useMessage();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     // const iconStyles: CSSProperties = {
     //     marginInlineStart: '16px',
@@ -91,7 +93,7 @@ const ServerAdminLogin: React.FC = () => {
             valid = false
         }
 
-        if (!sliderVerified) {
+        if (!sliderVerified && loginType === 'sign_up') {
             messageApi.open({
                 type: 'error',
                 content: messages.plzFinishSliderVerification,
@@ -113,7 +115,32 @@ const ServerAdminLogin: React.FC = () => {
 
         if (valid) {
             if (loginType === 'sign_in') {
-
+                const loginData = {
+                    username: values.username,
+                    password: values.password,
+                }
+                try {
+                    setIsSubmitting(true)
+                    messageApi.open({
+                        type: 'warning',
+                        content: messages.submitting,
+                    });
+                    const loginResponse = await fetchServerAdminLogin(loginData)
+                    if (loginResponse.status === 200) {
+                        dispatch(setAdminToken(loginResponse.data.jwt))
+                        dispatch(setAdminInfo(loginResponse.data.payload))
+                        setToken(loginResponse.data.jwt)
+                        // console.log("Login Response: ", loginResponse.data.jwt);
+                        // console.log("Login Response: ", loginResponse.data.payload);
+                        navigate("/server")
+                    }
+                }catch (e) {
+                    setIsSubmitting(false)
+                    messageApi.open({
+                        type: 'error',
+                        content: messages.userNotExistOrPasswordError,
+                    });
+                }
             } else if (loginType === 'sign_up') {
                 const registerData = {
                     username: values.username,
@@ -132,12 +159,21 @@ const ServerAdminLogin: React.FC = () => {
                     }
                 } catch (e) {
                     setIsSubmitting(false)
-                    messageApi.open({
-                        type: 'error',
-                        content: messages.serverError,
-                    });
+                    if (typeof e === "object" && e !== null && "response" in e) {
+                        const status = (e as { response: Response }).response.status
+                        if (status === 409) {
+                            messageApi.open({
+                                type: 'error',
+                                content: messages.emailAlreadyExists,
+                            });
+                        }
+                    } else {
+                        messageApi.open({
+                            type: 'error',
+                            content: messages.serverError,
+                        });
+                    }
                 }
-
             }
         }
 

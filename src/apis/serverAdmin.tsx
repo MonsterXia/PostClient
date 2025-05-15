@@ -30,3 +30,11 @@ export function serverAdminRegisterValidationAPI(data: any) {
         data: data,
     });
 }
+
+export function serverAdminLoginAPI(data: any) {
+    return request({
+        url: "/admin/login",
+        method: "post",
+        data: data,
+    });
+}

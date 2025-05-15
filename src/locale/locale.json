@@ -111,6 +111,10 @@
         "en": "Register Failed, your email is not in the stage of verification.",
         "zh": "注册失败，您的邮箱不在验证阶段。"
     },
+    "userNotExistOrPasswordError": {
+        "en": "User not exist or password error",
+        "zh": "用户不存在或密码错误"
+    },
     "backToLogin": {
         "en": "Back to Login",
         "zh": "返回登录"
