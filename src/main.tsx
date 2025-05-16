@@ -33,7 +33,8 @@ createRoot(document.getElementById('root')!).render(
           Menu: {
             itemBorderRadius: 20,
             itemBg: '#13f0c0',
-            itemColor: '#ffffff'
+            popupBg: '#13f0c0',
+            itemColor: '#ffffff',
           },
         },
       }}
@@ -42,5 +43,5 @@ createRoot(document.getElementById('root')!).render(
           <RouterProvider router={router} />
       </Provider>
     </ConfigProvider>
-  </StrictMode>,
+  </StrictMode>
 )
