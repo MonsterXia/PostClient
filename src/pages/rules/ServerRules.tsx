@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown"
 import rehypeHighlight from "rehype-highlight"
 import rehypeSlug from "rehype-slug";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 import remarkGfm from "remark-gfm";
 import { toc } from "mdast-util-toc";
 import { visit } from "unist-util-visit";
 import { Root } from "mdast";
 
+import "katex/dist/katex.min.css";
 import "./ServerRules.css"
 
 function remarkTocPlugin() {
@@ -65,8 +68,8 @@ function ServerRules() {
     return (
         <div className="server-rules">
             <ReactMarkdown
-                rehypePlugins={[rehypeHighlight, rehypeSlug]}
-                remarkPlugins={[remarkGfm, remarkTocPlugin, remarkRemovePageBreak]}
+                rehypePlugins={[rehypeHighlight, rehypeSlug, rehypeKatex]}
+                remarkPlugins={[remarkMath, remarkGfm, remarkTocPlugin, remarkRemovePageBreak]}
             >
                 {markdown}
             </ReactMarkdown>
