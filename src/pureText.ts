@@ -1,4 +1,4 @@
-const PURE_TEXT_ROUTE = /^\/pureText\/([^/]+)\/?$/
+const PURE_TEXT_ROUTE = /^\/pureText\/([^/]+)\/?$/i
 const PURE_TEXT_EXTENSIONS = ['.txt', '.cfg'] as const
 
 export function getPureTextFileName(pathname: string): string | null {
