@@ -12,8 +12,9 @@ both extensions exist for the same name, `.txt` takes priority.
 
 In production, `functions/_middleware.js` handles these routes in Cloudflare
 Pages before the SPA fallback and returns the file bytes with
-`Content-Type: text/plain; charset=utf-8`. The client bootstrap provides the
-same visible behavior when running directly through the local Vite server.
+`Content-Type: text/plain; charset=utf-8`. The local Vite server does not run
+Cloudflare Pages Functions, so use a Pages-compatible local runtime when
+testing the raw HTTP response locally.
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
