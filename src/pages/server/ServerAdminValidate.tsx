@@ -3,18 +3,18 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Skeleton, ConfigProvider, Result, Button } from 'antd';
 import { fetchServerAdminRegisterValidation } from "@/utils";
 import { useSelector } from "react-redux";
+import type { RootState } from "@/store";
 
 
 
 const ServerAdminValidate: React.FC = () => {
-    const params = useParams();
-    const { messages, locale } = useSelector((state: any) => state.language);
+    const { username, otp } = useParams();
+    const { messages, locale } = useSelector((state: RootState) => state.language);
     const [loading, setLoading] = useState(true);
     const [validateResult, setValidateResult] = useState<"success" | "error" | "info" | "warning" | undefined>("error");
     const navigate = useNavigate();
 
     useEffect(() => {
-        const { username, otp } = params;
         console.log("Username: ", username);
         console.log("OTP: ", otp);
 
@@ -35,7 +35,7 @@ const ServerAdminValidate: React.FC = () => {
                 console.log("Error: ", err);
                 setLoading(false);
             })
-    }, []);
+    }, [otp, username]);
 
 
     return (

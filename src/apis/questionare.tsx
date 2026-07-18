@@ -7,7 +7,7 @@ export function getLayerImprovmentFormAPI() {
     });
 }
 
-export function submitLayerImprovmentFormAPI(data: any) {
+export function submitLayerImprovmentFormAPI(data: unknown) {
     return request({
         url: "/public/questionare/layerimprovement",
         method: "post",

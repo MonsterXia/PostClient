@@ -8,9 +8,10 @@ import type { MenuProps } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setLanguage } from '@/store/modules/messages';
+import type { RootState } from '@/store';
 const Root: React.FC = () => {
     const dispatch = useDispatch();
-    const { messages, locale } = useSelector((state: any) => state.language);
+    const { messages, locale } = useSelector((state: RootState) => state.language);
 
     useEffect(() => {
         const language = navigator.language;

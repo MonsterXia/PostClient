@@ -5,22 +5,22 @@ export const fetchLayerImprovmentForm = async () => {
   return res;
 };
 
-export const fetchAdminEmailCheck = async (data: any) => {
+export const fetchAdminEmailCheck = async (data: unknown) => {
   const res = await usernameCheckAPI(data);
   return res;
 }
 
-export const fetchServerAdminRegister = async (data: any) => {
+export const fetchServerAdminRegister = async (data: unknown) => {
   const res = await serverAdminRegisterAPI(data);
   return res;
 };
 
-export const fetchServerAdminRegisterValidation = async (data: any) => {
+export const fetchServerAdminRegisterValidation = async (data: unknown) => {
   const res = await serverAdminRegisterValidationAPI(data);
   return res;
 };
 
-export const fetchServerAdminLogin = async (data: any) => {
+export const fetchServerAdminLogin = async (data: unknown) => {
   const res = await serverAdminLoginAPI(data);
   return res;
 };

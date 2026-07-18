@@ -5,13 +5,24 @@ import { useSelector } from "react-redux";
 import "./LayerImprovment.css";
 import { pushLayerImprovement } from "@/utils/push";
 import { useNavigate } from "react-router-dom";
+import type { RootState } from "@/store";
+
+type LayerImprovementForm = {
+    formPart1: { country: string, battleGroup: string }[];
+    formPart2: string[];
+}
+
+type LayerImprovementValues = Record<string, number | undefined>;
+
 const LayerImprovment: React.FC = () => {
-    const [data, setData] = useState<any>({});
+    const [data, setData] = useState<LayerImprovementForm | null>(null);
     const [loading, setLoading] = useState(true);
-    const { messages, locale } = useSelector((state: any) => state.language);
+    const { messages, locale } = useSelector((state: RootState) => state.language);
     const [messageApi, contextHolder] = message.useMessage();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const naviagte = useNavigate();
+
+    const failed2catchData = messages.failed2catchData;
 
     useEffect(() => {
         const jsonData = fetchLayerImprovmentForm();
@@ -24,17 +35,17 @@ const LayerImprovment: React.FC = () => {
         }).catch((error) => {
             messageApi.open({
                 type: 'error',
-                content: messages.failed2catchData,
+                content: failed2catchData,
             });
             console.error("Error fetching data:", error);
         })
-    }, []);
+    }, [failed2catchData, messageApi]);
 
-    const formPart1: { country: string, battleGroup: string }[] = data?.formPart1;
-    const formPart2: string[] = data?.formPart2;
+    const formPart1 = data?.formPart1 ?? [];
+    const formPart2 = data?.formPart2 ?? [];
     const [form] = Form.useForm();
 
-    const onFinish = async (values: any) => {
+    const onFinish = async (values: LayerImprovementValues) => {
         setIsSubmitting(true);
         messageApi.open({
             type: 'warning',
@@ -45,14 +56,14 @@ const LayerImprovment: React.FC = () => {
             return {
                 "country": item.country,
                 "battle_group": item.battleGroup,
-                "score": values["battleGroup_" + index] === undefined ? 50 : values["battleGroup_" + index],
+                "score": values["battleGroup_" + index] ?? 50,
             };
         });
 
         const formPart2Values: { layer: string, score: number }[] = formPart2.map((item, index) => {
             return {
                 layer: item,
-                score: values["layer" + index] === undefined ? 50 : values["layer" + index],
+                score: values["layer" + index] ?? 50,
             };
         });
 
