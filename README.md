@@ -10,6 +10,11 @@ layout and authenticated routes, and display the file contents as plain text.
 If neither supported file exists, the normal React 404 page is displayed. When
 both extensions exist for the same name, `.txt` takes priority.
 
+In production, `functions/_middleware.js` handles these routes in Cloudflare
+Pages before the SPA fallback and returns the file bytes with
+`Content-Type: text/plain; charset=utf-8`. The client bootstrap provides the
+same visible behavior when running directly through the local Vite server.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
