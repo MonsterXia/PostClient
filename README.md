@@ -4,7 +4,8 @@
 
 Put `.txt` and `.cfg` files in `public/pureTextFiles`. Files named `example.txt`
 and `config.cfg` are available at `/pureText/example` and `/pureText/config`.
-The extension may also be included in the URL. These URLs bypass the React page
+The route prefix is case-insensitive, so `/puretext/config` is also valid. The
+extension may also be included in the URL. These URLs bypass the React page
 layout and authenticated routes, and display the file contents as plain text.
 If neither supported file exists, the normal React 404 page is displayed. When
 both extensions exist for the same name, `.txt` takes priority.
