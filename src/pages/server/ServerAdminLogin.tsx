@@ -20,16 +20,23 @@ import { fetchAdminEmailCheck, fetchServerAdminLogin, fetchServerAdminRegister, 
 import emailRegex from 'email-regex';
 import { useNavigate } from 'react-router-dom';
 import { setAdminInfo, setAdminToken } from '@/store/modules/Admin';
+import type { RootState } from '@/store';
 
 type LoginType = 'sign_in' | 'sign_up';
 
+type LoginFormValues = {
+    username?: string;
+    password?: string;
+    confirmPassword?: string;
+}
+
 const ServerAdminLogin: React.FC = () => {
-    const formRef = useRef<ProFormInstance>(null);
+    const formRef = useRef<ProFormInstance<LoginFormValues>>(null);
     const actionRef = useRef<ActionType>(undefined);
     const { token } = theme.useToken();
     const [loginType, setLoginType] = useState<LoginType>('sign_in');
     const [sliderVerified, setSliderVerified] = useState(false);
-    const { messages, locale } = useSelector((state: any) => state.language);
+    const { messages, locale } = useSelector((state: RootState) => state.language);
     const [messageApi, contextHolder] = message.useMessage();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
@@ -48,7 +55,7 @@ const ServerAdminLogin: React.FC = () => {
     const controlButtonWidth = 40;
     const indicatorBorderWidth = 2;
 
-    const emailAddressValidate = async (_: any, value: string) => {
+    const emailAddressValidate = async (_rule: unknown, value: string) => {
         let valid = true
 
         if (!emailRegex().test(value)) {
@@ -82,8 +89,8 @@ const ServerAdminLogin: React.FC = () => {
 
     const handleLogin = async () => {
         let valid = true
-        let values = formRef.current?.getFieldsFormatValue?.()
-        let emailAddress = values.username
+        const values = formRef.current?.getFieldsFormatValue?.()
+        const emailAddress = values?.username ?? ''
 
         if (!emailRegex().test(emailAddress)) {
             messageApi.open({
@@ -101,10 +108,8 @@ const ServerAdminLogin: React.FC = () => {
             valid = false
         }
 
-        if (loginType === 'sign_in') {
-
-        } else if (loginType === 'sign_up') {
-            if (values.password !== values.confirmPassword) {
+        if (loginType === 'sign_up') {
+            if (values?.password !== values?.confirmPassword) {
                 messageApi.open({
                     type: 'error',
                     content: messages.passwordsDoNotMatch,
@@ -116,8 +121,8 @@ const ServerAdminLogin: React.FC = () => {
         if (valid) {
             if (loginType === 'sign_in') {
                 const loginData = {
-                    username: values.username,
-                    password: values.password,
+                    username: values?.username ?? '',
+                    password: values?.password ?? '',
                 }
                 try {
                     setIsSubmitting(true)
@@ -134,7 +139,7 @@ const ServerAdminLogin: React.FC = () => {
                         // console.log("Login Response: ", loginResponse.data.payload);
                         navigate("/server")
                     }
-                }catch (e) {
+                } catch {
                     setIsSubmitting(false)
                     messageApi.open({
                         type: 'error',
@@ -143,8 +148,8 @@ const ServerAdminLogin: React.FC = () => {
                 }
             } else if (loginType === 'sign_up') {
                 const registerData = {
-                    username: values.username,
-                    password: values.password,
+                    username: values?.username ?? '',
+                    password: values?.password ?? '',
                 }
 
                 try {

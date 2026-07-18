@@ -2,10 +2,11 @@ import React from 'react';
 import { ConfigProvider, Button, Result } from 'antd';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import type { RootState } from '@/store';
 
 const Fallback: React.FC = () => {
     const navigate = useNavigate();
-    const { messages, locale } = useSelector((state: any) => state.language);
+    const { messages, locale } = useSelector((state: RootState) => state.language);
 
     return (
         <ConfigProvider

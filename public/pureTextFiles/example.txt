@@ -1,0 +1,2 @@
+This text is displayed without the application layout or authentication.
+Line breaks are preserved.

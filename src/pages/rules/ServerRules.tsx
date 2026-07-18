@@ -15,19 +15,14 @@ import "./ServerRules.css"
 
 function remarkTocPlugin() {
     return (tree: Root) => {
-        visit(tree, "text", (node:any, index, parent) => {
-            if (node.value === "[TOC]") {
+        visit(tree, "text", (node, index, parent) => {
+            if (node.value === "[TOC]" && index !== undefined && parent) {
                 const result = toc(tree, { maxDepth: 3 });
 
-                if (result.map) {
-                    if (parent.type === "paragraph") {
-                        // 如果父节点是段落，将目录插入到父节点的外层
-                        const grandParent = tree; // 假设父节点的父节点是根节点
-                        const parentIndex = grandParent.children.indexOf(parent);
-                        grandParent.children.splice(parentIndex, 1, result.map);
-                    } else {
-                        // 替换 [TOC] 节点为目录
-                        parent.children.splice(index, 1, result.map);
+                if (result.map && parent.type === "paragraph") {
+                    const parentIndex = tree.children.indexOf(parent);
+                    if (parentIndex >= 0) {
+                        tree.children.splice(parentIndex, 1, result.map);
                     }
                 }
             }
@@ -37,11 +32,13 @@ function remarkTocPlugin() {
 
 function remarkRemovePageBreak() {
     return (tree: Root) => {
-        visit(tree, "html", (node: any, index, parent) => {
+        visit(tree, "html", (node, index, parent) => {
             if (
                 typeof node.value === "string" &&
                 node.value.trim() ===
-                '<div style="page-break-after:always;"></div>'
+                '<div style="page-break-after:always;"></div>' &&
+                index !== undefined &&
+                parent
             ) {
                 parent.children.splice(index, 1); // 删除该节点
             }
