@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Skeleton, ConfigProvider, Result, Button } from 'antd';
-import { fetchServerAdminRegisterValidation } from "@/utils";
+import { serverAdminRegisterValidationAPI } from "@/apis";
 import { useSelector } from "react-redux";
 import type { RootState } from "@/store";
 
@@ -22,7 +22,7 @@ const ServerAdminValidate: React.FC = () => {
             username: username,
             otp: otp
         }
-        fetchServerAdminRegisterValidation(data2Push)
+        serverAdminRegisterValidationAPI(data2Push)
             .then((res) => {
                 console.log("Response: ", res);
                 if (res.status === 200) {

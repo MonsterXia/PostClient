@@ -1,11 +1,5 @@
 import { request } from '@/utils'
 
-// export function serverAdminRegisterAPI() {
-//     return request({
-//         url: "/public/questionare/layerimprovement",
-//         method: "post",
-//     });
-// }
 
 export function usernameCheckAPI(data: unknown) {
     return request({

@@ -1,6 +1,4 @@
 import Fallback from "@/pages/fallback/fallback";
-import QuestionareComplete from "@/pages/questionares/Complete";
-import LayerImprovment from "@/pages/questionares/LayerImprovment";
 import TestComponent from "@/pages/test/test";
 import Root from "@/pages/root/Root";
 import ServerRules from "@/pages/rules/ServerRules";
@@ -23,14 +21,6 @@ const router = createBrowserRouter([
             {
                 path: "rules",
                 element: <ServerRules />
-            },
-            {
-                path: "questionares/complete",
-                element: <QuestionareComplete />
-            },
-            {
-                path: "questionares/",
-                element: <LayerImprovment />,
             },
             {
                 path: "server/login",

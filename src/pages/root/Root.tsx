@@ -63,10 +63,6 @@ const Root: React.FC = () => {
             key: "server",
             label: messages.server,
         },
-        {
-            key: "questionares",
-            label: messages.questionares,
-        }
     ]
 
     const handleMenuClick: MenuProps['onClick'] = (e) => {
@@ -80,9 +76,6 @@ const Root: React.FC = () => {
                 break;
             case "server":
                 navigate("/server");
-                break;
-            case "questionares":
-                navigate("/questionares");
                 break;
             default:
                 break;
