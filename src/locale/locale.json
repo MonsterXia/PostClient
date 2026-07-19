@@ -180,8 +180,8 @@
         "zh": "忘记密码"
     },
     "strongPasswordTips": {
-        "en": "Strong password should contain numbers, letters and special characters, at least 12 characters long.",
-        "zh": "强密码应包含数字、字母和特殊字符，至少12个字符长。"
+        "en": "Password must be at least 6 characters and contain at least one uppercase letter, one lowercase letter, and one special character.",
+        "zh": "密码至少6个字符，必须包含至少一个大写字母、一个小写字母和一个特殊字符。"
     },
     "OTP": {
         "en": "OTP",
@@ -242,5 +242,21 @@
     "level": {
         "en": "Level",
         "zh": "地图"
+    },
+    "passwordMustContainUppercase": {
+        "en": "Password must contain at least one uppercase letter",
+        "zh": "密码必须包含至少一个大写字母"
+    },
+    "passwordMustContainLowercase": {
+        "en": "Password must contain at least one lowercase letter",
+        "zh": "密码必须包含至少一个小写字母"
+    },
+    "passwordMustContainSpecialChar": {
+        "en": "Password must contain at least one special character",
+        "zh": "密码必须包含至少一个特殊字符"
+    },
+    "passwordRequirements": {
+        "en": "Must contain uppercase, lowercase, and special character",
+        "zh": "必须包含大写字母、小写字母和特殊字符"
     }
 }

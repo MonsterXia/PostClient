@@ -19,18 +19,17 @@ const ServerAdminValidate: React.FC = () => {
         console.log("OTP: ", otp);
 
         const data2Push = {
-            username: username,
-            otp: otp
+            email: username,
+            token: otp
         }
         fetchServerAdminRegisterValidation(data2Push)
             .then((res) => {
                 console.log("Response: ", res);
-                if (res.status === 200) {
+                // 后端成功返回201(Created)，需要检查200或201
+                if (res.status === 200 || res.status === 201) {
                     setValidateResult("success");
-                    setLoading(false);
-                } else {
-                    setLoading(false);
                 }
+                setLoading(false);
             }).catch((err) => {
                 console.log("Error: ", err);
                 setLoading(false);

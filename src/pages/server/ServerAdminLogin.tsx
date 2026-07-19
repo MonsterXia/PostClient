@@ -16,10 +16,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import SliderCaptcha, { ActionType } from 'rc-slider-captcha';
 
 import "./ServerAdminLogin.css"
-import { fetchAdminEmailCheck, fetchServerAdminLogin, fetchServerAdminRegister, setToken } from '@/utils';
+import { fetchAdminEmailCheck, fetchServerAdminLogin, fetchServerAdminRegister } from '@/utils';
 import emailRegex from 'email-regex';
 import { useNavigate } from 'react-router-dom';
-import { setAdminInfo, setAdminToken } from '@/store/modules/Admin';
+import { setAdminInfo } from '@/store/modules/Admin';
 import type { RootState } from '@/store';
 
 type LoginType = 'sign_in' | 'sign_up';
@@ -89,6 +89,17 @@ const ServerAdminLogin: React.FC = () => {
 
     const handleLogin = async () => {
         let valid = true
+        
+        // 先触发表单验证
+        try {
+            await formRef.current?.validateFields?.();
+        } catch (errorInfo) {
+            // 表单验证失败，直接返回
+            valid = false;
+        }
+        
+        if (!valid) return;
+        
         const values = formRef.current?.getFieldsFormatValue?.()
         const emailAddress = values?.username ?? ''
 
@@ -121,7 +132,7 @@ const ServerAdminLogin: React.FC = () => {
         if (valid) {
             if (loginType === 'sign_in') {
                 const loginData = {
-                    username: values?.username ?? '',
+                    email: values?.username ?? '',
                     password: values?.password ?? '',
                 }
                 try {
@@ -132,11 +143,8 @@ const ServerAdminLogin: React.FC = () => {
                     });
                     const loginResponse = await fetchServerAdminLogin(loginData)
                     if (loginResponse.status === 200) {
-                        dispatch(setAdminToken(loginResponse.data.jwt))
-                        dispatch(setAdminInfo(loginResponse.data.payload))
-                        setToken(loginResponse.data.jwt)
-                        // console.log("Login Response: ", loginResponse.data.jwt);
-                        // console.log("Login Response: ", loginResponse.data.payload);
+                        // 后端通过cookie传递JWT，data字段直接是用户信息
+                        dispatch(setAdminInfo(loginResponse.data))
                         navigate("/server")
                     }
                 } catch {
@@ -148,7 +156,7 @@ const ServerAdminLogin: React.FC = () => {
                 }
             } else if (loginType === 'sign_up') {
                 const registerData = {
-                    username: values?.username ?? '',
+                    email: values?.username ?? '',
                     password: values?.password ?? '',
                 }
 
@@ -334,10 +342,16 @@ const ServerAdminLogin: React.FC = () => {
                                         strengthText: messages.strongPasswordTips,
                                         statusRender: (value) => {
                                             const getStatus = () => {
-                                                if (value && value.length > 12) {
+                                                if (!value) return 'poor';
+                                                const hasUpper = /[A-Z]/.test(value);
+                                                const hasLower = /[a-z]/.test(value);
+                                                const hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value);
+                                                const hasMinLength = value.length >= 6;
+                                                
+                                                if (hasUpper && hasLower && hasSpecial && value.length >= 12) {
                                                     return 'ok';
                                                 }
-                                                if (value && value.length > 6) {
+                                                if (hasUpper && hasLower && hasSpecial && hasMinLength) {
                                                     return 'pass';
                                                 }
                                                 return 'poor';
@@ -371,6 +385,21 @@ const ServerAdminLogin: React.FC = () => {
                                         {
                                             min: 6,
                                             message: messages.passwordNotLessThan6,
+                                        },
+                                        {
+                                            validator(_, value) {
+                                                if (!value) return Promise.resolve();
+                                                if (!/[A-Z]/.test(value)) {
+                                                    return Promise.reject(new Error(messages.passwordMustContainUppercase));
+                                                }
+                                                if (!/[a-z]/.test(value)) {
+                                                    return Promise.reject(new Error(messages.passwordMustContainLowercase));
+                                                }
+                                                if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value)) {
+                                                    return Promise.reject(new Error(messages.passwordMustContainSpecialChar));
+                                                }
+                                                return Promise.resolve();
+                                            },
                                         },
                                     ]}
                                 />

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export const request = axios.create({
-    baseURL: import.meta.env.PROD ? "https://api.post.246801357.xyz" : "http://localhost:8787",
+    baseURL: import.meta.env.PROD ? "https://api.246801357.xyz" : "http://localhost:8787",
     timeout: 10000,
 });
 
