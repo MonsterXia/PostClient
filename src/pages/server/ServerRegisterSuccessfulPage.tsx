@@ -1,9 +1,10 @@
 import { Result, Button, ConfigProvider } from "antd";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import type { RootState } from "@/store";
 
 const ServerRegisterSuccessfulPage: React.FC = () => {
-    const { messages, locale } = useSelector((state: any) => state.language);
+    const { messages, locale } = useSelector((state: RootState) => state.language);
     const navigate = useNavigate();
     return (
         <ConfigProvider
