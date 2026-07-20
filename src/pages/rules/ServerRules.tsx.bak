@@ -11,7 +11,6 @@ import { visit } from "unist-util-visit";
 import { Root } from "mdast";
 
 import "katex/dist/katex.min.css";
-import "highlight.js/styles/github.css";
 import "./ServerRules.css"
 
 function remarkTocPlugin() {
@@ -21,14 +20,6 @@ function remarkTocPlugin() {
                 const result = toc(tree, { maxDepth: 3 });
 
                 if (result.map && parent.type === "paragraph") {
-                    // Mark the TOC list so CSS can target it
-                    (result.map as any).data = {
-                        ...(result.map as any).data,
-                        hProperties: {
-                            ...(result.map as any).data?.hProperties,
-                            className: "toc-list",
-                        },
-                    };
                     const parentIndex = tree.children.indexOf(parent);
                     if (parentIndex >= 0) {
                         tree.children.splice(parentIndex, 1, result.map);
@@ -55,16 +46,35 @@ function remarkRemovePageBreak() {
     };
 }
 
+// Custom component to detect and style TOC items
 const components = {
-    pre: ({ children, ...props }: any) => {
-        return <pre className="code-block" {...props}>{children}</pre>;
-    },
-    code: ({ children, className, ...props }: any) => {
-        const isInline = !className;
-        if (isInline) {
-            return <code className="inline-code" {...props}>{children}</code>;
+    ul: ({ node, children, ...props }: any) => {
+        // Check if this is a TOC list by looking at the first child
+        const isTocList = node?.children?.some((child: any) => 
+            child.children?.some((grandchild: any) => 
+                grandchild.type === 'link' || 
+                (grandchild.type === 'paragraph' && grandchild.children?.some((gg: any) => gg.type === 'link'))
+            )
+        );
+        
+        if (isTocList) {
+            return <ul className="toc-list" {...props}>{children}</ul>;
         }
-        return <code className={className} {...props}>{children}</code>;
+        return <ul {...props}>{children}</ul>;
+    },
+    ol: ({ node, children, ...props }: any) => {
+        // Check if this is a TOC list by looking at the first child
+        const isTocList = node?.children?.some((child: any) => 
+            child.children?.some((grandchild: any) => 
+                grandchild.type === 'link' || 
+                (grandchild.type === 'paragraph' && grandchild.children?.some((gg: any) => gg.type === 'link'))
+            )
+        );
+        
+        if (isTocList) {
+            return <ol className="toc-list" {...props}>{children}</ol>;
+        }
+        return <ol {...props}>{children}</ol>;
     }
 };
 
