@@ -8,7 +8,7 @@ const admin = createSlice({
     },
     reducers: {
         setAdminToken: (state, action) => {
-            let tokenStr = action.payload.substring(7);
+            const tokenStr = action.payload.substring(7);
             state.adminToken = tokenStr;
             // console.log("adminToken", state.adminToken);
         },

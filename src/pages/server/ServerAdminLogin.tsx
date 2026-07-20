@@ -16,20 +16,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import SliderCaptcha, { ActionType } from 'rc-slider-captcha';
 
 import "./ServerAdminLogin.css"
-import { fetchAdminEmailCheck, fetchServerAdminLogin, fetchServerAdminRegister, setToken } from '@/utils';
+import { fetchAdminEmailCheck, fetchServerAdminLogin, fetchServerAdminRegister } from '@/utils';
 import emailRegex from 'email-regex';
 import { useNavigate } from 'react-router-dom';
-import { setAdminInfo, setAdminToken } from '@/store/modules/Admin';
+import { setAdminInfo } from '@/store/modules/Admin';
+import type { RootState } from '@/store';
 
 type LoginType = 'sign_in' | 'sign_up';
 
+type LoginFormValues = {
+    username?: string;
+    password?: string;
+    confirmPassword?: string;
+}
+
 const ServerAdminLogin: React.FC = () => {
-    const formRef = useRef<ProFormInstance>(null);
+    const formRef = useRef<ProFormInstance<LoginFormValues>>(null);
     const actionRef = useRef<ActionType>(undefined);
     const { token } = theme.useToken();
     const [loginType, setLoginType] = useState<LoginType>('sign_in');
     const [sliderVerified, setSliderVerified] = useState(false);
-    const { messages, locale } = useSelector((state: any) => state.language);
+    const { messages, locale } = useSelector((state: RootState) => state.language);
     const [messageApi, contextHolder] = message.useMessage();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
@@ -48,7 +55,7 @@ const ServerAdminLogin: React.FC = () => {
     const controlButtonWidth = 40;
     const indicatorBorderWidth = 2;
 
-    const emailAddressValidate = async (_: any, value: string) => {
+    const emailAddressValidate = async (_rule: unknown, value: string) => {
         let valid = true
 
         if (!emailRegex().test(value)) {
@@ -82,8 +89,19 @@ const ServerAdminLogin: React.FC = () => {
 
     const handleLogin = async () => {
         let valid = true
-        let values = formRef.current?.getFieldsFormatValue?.()
-        let emailAddress = values.username
+        
+        // 先触发表单验证
+        try {
+            await formRef.current?.validateFields?.();
+        } catch (errorInfo) {
+            // 表单验证失败，直接返回
+            valid = false;
+        }
+        
+        if (!valid) return;
+        
+        const values = formRef.current?.getFieldsFormatValue?.()
+        const emailAddress = values?.username ?? ''
 
         if (!emailRegex().test(emailAddress)) {
             messageApi.open({
@@ -101,10 +119,8 @@ const ServerAdminLogin: React.FC = () => {
             valid = false
         }
 
-        if (loginType === 'sign_in') {
-
-        } else if (loginType === 'sign_up') {
-            if (values.password !== values.confirmPassword) {
+        if (loginType === 'sign_up') {
+            if (values?.password !== values?.confirmPassword) {
                 messageApi.open({
                     type: 'error',
                     content: messages.passwordsDoNotMatch,
@@ -116,8 +132,8 @@ const ServerAdminLogin: React.FC = () => {
         if (valid) {
             if (loginType === 'sign_in') {
                 const loginData = {
-                    username: values.username,
-                    password: values.password,
+                    email: values?.username ?? '',
+                    password: values?.password ?? '',
                 }
                 try {
                     setIsSubmitting(true)
@@ -127,14 +143,11 @@ const ServerAdminLogin: React.FC = () => {
                     });
                     const loginResponse = await fetchServerAdminLogin(loginData)
                     if (loginResponse.status === 200) {
-                        dispatch(setAdminToken(loginResponse.data.jwt))
-                        dispatch(setAdminInfo(loginResponse.data.payload))
-                        setToken(loginResponse.data.jwt)
-                        // console.log("Login Response: ", loginResponse.data.jwt);
-                        // console.log("Login Response: ", loginResponse.data.payload);
+                        // 后端通过cookie传递JWT，data字段直接是用户信息
+                        dispatch(setAdminInfo(loginResponse.data))
                         navigate("/server")
                     }
-                }catch (e) {
+                } catch {
                     setIsSubmitting(false)
                     messageApi.open({
                         type: 'error',
@@ -143,8 +156,8 @@ const ServerAdminLogin: React.FC = () => {
                 }
             } else if (loginType === 'sign_up') {
                 const registerData = {
-                    username: values.username,
-                    password: values.password,
+                    email: values?.username ?? '',
+                    password: values?.password ?? '',
                 }
 
                 try {
@@ -329,10 +342,16 @@ const ServerAdminLogin: React.FC = () => {
                                         strengthText: messages.strongPasswordTips,
                                         statusRender: (value) => {
                                             const getStatus = () => {
-                                                if (value && value.length > 12) {
+                                                if (!value) return 'poor';
+                                                const hasUpper = /[A-Z]/.test(value);
+                                                const hasLower = /[a-z]/.test(value);
+                                                const hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value);
+                                                const hasMinLength = value.length >= 6;
+                                                
+                                                if (hasUpper && hasLower && hasSpecial && value.length >= 12) {
                                                     return 'ok';
                                                 }
-                                                if (value && value.length > 6) {
+                                                if (hasUpper && hasLower && hasSpecial && hasMinLength) {
                                                     return 'pass';
                                                 }
                                                 return 'poor';
@@ -366,6 +385,21 @@ const ServerAdminLogin: React.FC = () => {
                                         {
                                             min: 6,
                                             message: messages.passwordNotLessThan6,
+                                        },
+                                        {
+                                            validator(_, value) {
+                                                if (!value) return Promise.resolve();
+                                                if (!/[A-Z]/.test(value)) {
+                                                    return Promise.reject(new Error(messages.passwordMustContainUppercase));
+                                                }
+                                                if (!/[a-z]/.test(value)) {
+                                                    return Promise.reject(new Error(messages.passwordMustContainLowercase));
+                                                }
+                                                if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value)) {
+                                                    return Promise.reject(new Error(messages.passwordMustContainSpecialChar));
+                                                }
+                                                return Promise.resolve();
+                                            },
                                         },
                                     ]}
                                 />

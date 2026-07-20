@@ -23,5 +23,11 @@ dist-ssr
 *.sln
 *.sw?
 
+# AI
+docs/superpowers
+
+# AI
+docs/superpowers
+
 # pdfs
 *.pdf

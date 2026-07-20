@@ -16,7 +16,7 @@ import store from '@/store'
 import './index.css'
 
 
-if (process.env.NODE_ENV === 'production') {
+if (import.meta.env.PROD) {
   console.warn = () => { };
   console.error = () => { };
   console.log = () => { };
@@ -40,7 +40,7 @@ createRoot(document.getElementById('root')!).render(
       }}
     >
       <Provider store={store}>
-          <RouterProvider router={router} />
+        <RouterProvider router={router} />
       </Provider>
     </ConfigProvider>
   </StrictMode>
