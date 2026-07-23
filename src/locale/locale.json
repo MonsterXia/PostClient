@@ -1,4 +1,4 @@
-{
+﻿{
     "submit": {
         "en": "Submit",
         "zh": "提交"
@@ -40,8 +40,8 @@
         "zh": "服务器"
     },
     "changeLanguage": {
-        "en": "切换语言",
-        "zh": "Change Language"
+        "en": "Change Language",
+        "zh": "切换语言"
     },
     "post": {
         "en": "Post",
