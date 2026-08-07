@@ -2,7 +2,7 @@ import Fallback from "@/pages/fallback/fallback";
 import TestComponent from "@/pages/test/test";
 import Root from "@/pages/root/Root";
 import ServerRules from "@/pages/rules/ServerRules";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router";
 import ServerIndex from "@/pages/server/ServerIndexPage"
 import ServerAdminLogin from "@/pages/server/ServerAdminLogin";
 import { AuthRoute } from "@/components/ServerAuth";

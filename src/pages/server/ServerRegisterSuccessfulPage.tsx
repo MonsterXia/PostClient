@@ -1,6 +1,6 @@
 import { Result, Button, ConfigProvider } from "antd";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import type { RootState } from "@/store";
 
 const ServerRegisterSuccessfulPage: React.FC = () => {

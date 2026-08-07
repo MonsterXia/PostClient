@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { ConfigProvider, Layout, Menu, theme, Space, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { Outlet, useNavigate, useLocation } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router';
 import './Root.css';
 
 import type { MenuProps } from 'antd';
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setLanguage } from '@/store/modules/messages';
 import type { RootState } from '@/store';
 const Root: React.FC = () => {
+    const START_YEAR = 2019;
     const dispatch = useDispatch();
     const { messages, locale } = useSelector((state: RootState) => state.language);
 
@@ -128,7 +129,7 @@ const Root: React.FC = () => {
                     </div>
                 </Content>
                 <Footer className='root-layout-footer'>
-                    {messages.post} ©{new Date().getFullYear()} {messages.allRightsReserved}
+                    {messages.post} © {START_YEAR}-{new Date().getFullYear()} {messages.allRightsReserved}
                 </Footer>
             </Layout>
         </ConfigProvider>

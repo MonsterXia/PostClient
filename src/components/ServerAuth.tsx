@@ -1,5 +1,5 @@
 import { getToken } from "@/utils";
-import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router";
 import { ReactNode } from "react";
 
 export function AuthRoute({ children }: { children: ReactNode }) {

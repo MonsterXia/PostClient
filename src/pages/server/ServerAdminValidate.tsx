@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import { Skeleton, ConfigProvider, Result, Button } from 'antd';
 import { fetchServerAdminRegisterValidation } from "@/utils";
 import { useSelector } from "react-redux";

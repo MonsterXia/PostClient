@@ -18,7 +18,7 @@ import SliderCaptcha, { ActionType } from 'rc-slider-captcha';
 import "./ServerAdminLogin.css"
 import { fetchAdminEmailCheck, fetchServerAdminLogin, fetchServerAdminRegister } from '@/utils';
 import emailRegex from 'email-regex';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { setAdminInfo } from '@/store/modules/Admin';
 import type { RootState } from '@/store';
 

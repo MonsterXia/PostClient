@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export const request = axios.create({
     baseURL: import.meta.env.PROD ? "https://api.246801357.xyz" : "http://localhost:8787",
