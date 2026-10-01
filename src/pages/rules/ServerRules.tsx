@@ -56,6 +56,17 @@ function remarkRemovePageBreak() {
 }
 
 const components: Components = {
+    ul: ({ children, className, ...props }) => {
+        if (className === "toc-list") {
+            return (
+                <details className="rules-toc">
+                    <summary><span>目录 · Contents</span></summary>
+                    <ul className={className} {...props}>{children}</ul>
+                </details>
+            );
+        }
+        return <ul className={className} {...props}>{children}</ul>;
+    },
     pre: ({ children, ...props }) => {
         return <pre className="code-block" {...props}>{children}</pre>;
     },

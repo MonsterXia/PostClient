@@ -1,36 +1,35 @@
-.root-layout {
-    min-height: 100vh;
-}
-
-.root-layout-header {
+.root-layout { min-height: 100vh; }
+.root-layout-header { background: #fffefa; border-bottom: 1px solid #e2e7df; }
+.root-header-inner {
+    max-width: 1120px;
+    min-height: 88px;
+    margin: 0 auto;
+    padding: 16px 40px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 }
-
-.root-layout-header-menu{
-    flex: 1; 
-    min-width: 0;
-}
-
-.root-layout-content {
-    padding: 24x 48px;
-}
-
-.root-layout-content-container{
-    min-height: 280px;
-    border-radius: 20px;
-}
-
-.root-layout-header-language{
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 2%;
-}
-
-.root-layout-footer{
-    text-align: center;
-}
-
-.root-logo {
-    height:80px;
+.root-brand { display: flex; align-items: center; gap: 12px; color: #243c31; font-size: 19px; font-weight: 650; }
+.root-logo { width: 50px; height: 50px; object-fit: contain; }
+.root-brand small { display: block; margin-top: 4px; font-size: 9px; letter-spacing: .16em; font-weight: 500; color: #66766b; }
+.root-header-actions { display: flex; align-items: center; gap: 28px; }
+.root-rules-link { font-size: 14px; font-weight: 600; border-bottom: 2px solid #347864; padding: 12px 0; }
+.root-language { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1px solid #dce4da; border-radius: 8px; background: transparent; color: #4c5f54; cursor: pointer; font-size: 13px; }
+.root-language:hover { background: #eef3ec; border-color: #afc5b8; }
+.root-language-chevron { font-size: 9px; }
+.root-layout-content { max-width: 1000px; margin: 0 auto; padding: 48px 40px 0; }
+.root-document-label { color: #627869; font-size: 10px; letter-spacing: .16em; font-weight: 600; margin: 0 0 20px 2px; }
+.root-layout-footer { max-width: 1000px; margin: 0 auto; padding: 28px 42px 40px; display: flex; justify-content: space-between; gap: 16px; color: #738174; font-size: 12px; }
+@media (max-width: 600px) {
+    .root-header-inner { min-height: 76px; padding: 12px 20px; gap: 12px; }
+    .root-logo { width: 40px; height: 40px; }
+    .root-brand { gap: 8px; font-size: 17px; }
+    .root-brand small { font-size: 8px; letter-spacing: .08em; }
+    .root-header-actions { gap: 14px; }
+    .root-language { padding: 8px; }
+    .root-language-chevron { display: none; }
+    .root-layout-content { padding: 28px 16px 0; }
+    .root-document-label { font-size: 9px; margin-left: 8px; margin-bottom: 16px; }
+    .root-layout-footer { padding: 24px; font-size: 11px; }
 }
