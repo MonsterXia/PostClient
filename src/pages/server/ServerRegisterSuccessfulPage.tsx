@@ -14,7 +14,7 @@ const ServerRegisterSuccessfulPage: React.FC = () => {
                 title={messages.registerPendingForVerification}
                 subTitle={messages.registerPendingForVerificationTips}
                 extra={[
-                    <Button type="primary" onClick={() => navigate("/server/login")}>
+                    <Button key="login" type="primary" onClick={() => navigate("/server/login")}>
                         {messages.backToLogin}
                     </Button>
                 ]}

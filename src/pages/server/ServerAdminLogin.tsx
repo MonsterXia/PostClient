@@ -18,6 +18,8 @@ import SliderCaptcha, { ActionType } from 'rc-slider-captcha';
 import "./ServerAdminLogin.css"
 import { fetchAdminEmailCheck, fetchServerAdminLogin, fetchServerAdminRegister } from '@/utils';
 import emailRegex from 'email-regex';
+import { isAxiosError } from 'axios';
+import { passwordValidationError } from '@/utils/password';
 import { useNavigate } from 'react-router';
 import { setAdminInfo } from '@/store/modules/Admin';
 import type { RootState } from '@/store';
@@ -56,147 +58,52 @@ const ServerAdminLogin: React.FC = () => {
     const indicatorBorderWidth = 2;
 
     const emailAddressValidate = async (_rule: unknown, value: string) => {
-        let valid = true
-
-        if (!emailRegex().test(value)) {
-            valid = false
+        if (!value || !emailRegex({ exact: true }).test(value)) return;
+        let available: boolean;
+        try {
+            const response = await fetchAdminEmailCheck({ email: value });
+            available = response.data.data;
+        } catch (error) {
+            const status = isAxiosError(error) ? error.response?.status : undefined;
+            throw new Error(status === 409 ? messages.emailAlreadyExists : messages.serverError);
         }
-
-        if (valid) {
-            const emailPush = {
-                email: value,
-            }
-
-            try {
-                const response = await fetchAdminEmailCheck(emailPush);
-                if (response.status === 200) {
-                    return Promise.resolve();
-                }
-            } catch (e) {
-                if (typeof e === "object" && e !== null && "response" in e) {
-                    const status = (e as { response: Response }).response.status
-                    if (status === 409) {
-                        return Promise.reject(new Error(messages.emailAlreadyExists));
-                    }
-                } else {
-                    return Promise.reject(new Error(messages.serverError));
-                }
-            }
-
-        }
-        // console.log(response);
-    }
+        if (!available) throw new Error(messages.emailAlreadyExists);
+    };
 
     const handleLogin = async () => {
-        let valid = true
-        
-        // 先触发表单验证
+        if (isSubmitting) return;
+        let values: LoginFormValues;
         try {
-            await formRef.current?.validateFields?.();
-        } catch (errorInfo) {
-            // 表单验证失败，直接返回
-            valid = false;
+            values = await formRef.current!.validateFields();
+        } catch {
+            return;
         }
-        
-        if (!valid) return;
-        
-        const values = formRef.current?.getFieldsFormatValue?.()
-        const emailAddress = values?.username ?? ''
-
-        if (!emailRegex().test(emailAddress)) {
-            messageApi.open({
-                type: 'error',
-                content: messages.emailFormatError,
-            });
-            valid = false
+        if (loginType === 'sign_up' && !sliderVerified) {
+            messageApi.error(messages.plzFinishSliderVerification);
+            return;
         }
-
-        if (!sliderVerified && loginType === 'sign_up') {
-            messageApi.open({
-                type: 'error',
-                content: messages.plzFinishSliderVerification,
-            });
-            valid = false
-        }
-
-        if (loginType === 'sign_up') {
-            if (values?.password !== values?.confirmPassword) {
-                messageApi.open({
-                    type: 'error',
-                    content: messages.passwordsDoNotMatch,
-                });
-                valid = false
-            }
-        }
-
-        if (valid) {
+        setIsSubmitting(true);
+        const credentials = { email: values.username ?? '', password: values.password ?? '' };
+        try {
             if (loginType === 'sign_in') {
-                const loginData = {
-                    email: values?.username ?? '',
-                    password: values?.password ?? '',
-                }
-                try {
-                    setIsSubmitting(true)
-                    messageApi.open({
-                        type: 'warning',
-                        content: messages.submitting,
-                    });
-                    const loginResponse = await fetchServerAdminLogin(loginData)
-                    if (loginResponse.status === 200) {
-                        // 后端通过cookie传递JWT，data字段直接是用户信息
-                        dispatch(setAdminInfo(loginResponse.data))
-                        navigate("/server")
-                    }
-                } catch {
-                    setIsSubmitting(false)
-                    messageApi.open({
-                        type: 'error',
-                        content: messages.userNotExistOrPasswordError,
-                    });
-                }
-            } else if (loginType === 'sign_up') {
-                const registerData = {
-                    email: values?.username ?? '',
-                    password: values?.password ?? '',
-                }
-
-                try {
-                    setIsSubmitting(true)
-                    messageApi.open({
-                        type: 'warning',
-                        content: messages.submitting,
-                    });
-                    const registerResponse = await fetchServerAdminRegister(registerData)
-                    if (registerResponse.status === 200) {
-                        navigate("/server/register/temperary")
-                    }
-                } catch (e) {
-                    setIsSubmitting(false)
-                    if (typeof e === "object" && e !== null && "response" in e) {
-                        const status = (e as { response: Response }).response.status
-                        if (status === 409) {
-                            messageApi.open({
-                                type: 'error',
-                                content: messages.emailAlreadyExists,
-                            });
-                        }
-                    } else {
-                        messageApi.open({
-                            type: 'error',
-                            content: messages.serverError,
-                        });
-                    }
-                }
+                const response = await fetchServerAdminLogin(credentials);
+                dispatch(setAdminInfo(response.data.data));
+                navigate('/server', { replace: true });
+            } else {
+                await fetchServerAdminRegister(credentials);
+                navigate('/server/register/temperary');
             }
+        } catch (error) {
+            const status = isAxiosError(error) ? error.response?.status : undefined;
+            messageApi.error(loginType === 'sign_in' && status === 401
+                ? messages.userNotExistOrPasswordError
+                : loginType === 'sign_up' && status === 409
+                    ? messages.emailAlreadyExists
+                    : messages.serverError);
+        } finally {
+            setIsSubmitting(false);
         }
-
-
-        // console.log(sliderVerified)
-        // console.log(
-        //     '格式化后的所有数据：',
-        //     values
-        // );
-    }
+    };
 
     return (
         <ProConfigProvider hashed={false}>
@@ -235,11 +142,12 @@ const ServerAdminLogin: React.FC = () => {
                         <Tabs
                             centered
                             activeKey={loginType}
-                            onChange={(activeKey) => setLoginType(activeKey as LoginType)}
-                        >
-                            <Tabs.TabPane key={'sign_in'} tab={messages.signIn} />
-                            <Tabs.TabPane key={'sign_up'} tab={messages.signUp} />
-                        </Tabs>
+                            onChange={(activeKey) => { setLoginType(activeKey as LoginType); setSliderVerified(false); }}
+                            items={[
+                                { key: 'sign_in', label: messages.signIn, disabled: isSubmitting },
+                                { key: 'sign_up', label: messages.signUp, disabled: isSubmitting },
+                            ]}
+                        />
                         {loginType === 'sign_in' && (
                             <>
                                 <ProFormText
@@ -314,6 +222,7 @@ const ServerAdminLogin: React.FC = () => {
                             <>
                                 <ProFormText
                                     name="username"
+                                    validateTrigger="onBlur"
                                     fieldProps={{
                                         size: 'large',
                                         prefix: <MailOutlined className={'prefixIcon'} />,
@@ -345,7 +254,7 @@ const ServerAdminLogin: React.FC = () => {
                                                 if (!value) return 'poor';
                                                 const hasUpper = /[A-Z]/.test(value);
                                                 const hasLower = /[a-z]/.test(value);
-                                                const hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value);
+                                                const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(value);
                                                 const hasMinLength = value.length >= 6;
                                                 
                                                 if (hasUpper && hasLower && hasSpecial && value.length >= 12) {
@@ -389,15 +298,8 @@ const ServerAdminLogin: React.FC = () => {
                                         {
                                             validator(_, value) {
                                                 if (!value) return Promise.resolve();
-                                                if (!/[A-Z]/.test(value)) {
-                                                    return Promise.reject(new Error(messages.passwordMustContainUppercase));
-                                                }
-                                                if (!/[a-z]/.test(value)) {
-                                                    return Promise.reject(new Error(messages.passwordMustContainLowercase));
-                                                }
-                                                if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value)) {
-                                                    return Promise.reject(new Error(messages.passwordMustContainSpecialChar));
-                                                }
+                                                const errorKey = passwordValidationError(value);
+                                                if (errorKey) return Promise.reject(new Error(messages[errorKey]));
                                                 return Promise.resolve();
                                             },
                                         },
@@ -410,6 +312,7 @@ const ServerAdminLogin: React.FC = () => {
                                         prefix: <LockOutlined className={'prefixIcon'} />,
                                     }}
                                     placeholder={messages.confirmPassword}
+                                    dependencies={['password']}
                                     rules={[
                                         {
                                             required: true,
@@ -469,7 +372,7 @@ const ServerAdminLogin: React.FC = () => {
                                         // console.log(data);
                                         if (data.x === controlBarWidth - controlButtonWidth - indicatorBorderWidth) {
                                             setSliderVerified(true);
-                                            console.log('Slider verified');
+
 
                                             return Promise.resolve();
                                         }

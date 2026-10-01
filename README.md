@@ -68,3 +68,26 @@ export default tseslint.config({
   },
 })
 ```
+
+## CommonServerAPI connection
+
+Use Node.js 24 LTS (`nvm use`; React Router requires at least Node 22.22).
+Run `npm ci`, `npm test`, `npm run build`, and `npm run lint` to validate changes.
+
+Development requests default to `http://localhost:8787`; production requests default
+to `https://api.246801357.xyz`. Set `VITE_API_BASE_URL` in `.env.local` before
+starting Vite or building to override this URL. Use `localhost` consistently on both
+local services. The API must allow the frontend origin with credentialed CORS;
+production frontend and API should be HTTPS and same-site for the SameSite cookie.
+
+Administrator sessions use the API's HttpOnly `post_auth_token` cookie. All API
+requests include credentials; `/server` restores the session using
+`GET /post/admin/current`. Old localStorage JWT values are ignored. Network errors
+allow retry, while missing/expired sessions return to login. Logout clears the
+server cookie before leaving the protected page.
+
+Registration sends `{ email, password }`, checks the boolean availability in the
+API response's `data`, and verifies `{ email, token }` through the existing
+`/server/register/username/:username/:otp` email-link route. Both 200 and 201
+verification responses are supported, and React StrictMode does not submit the
+one-time token twice.

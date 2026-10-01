@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Skeleton, ConfigProvider, Result, Button } from 'antd';
 import { fetchServerAdminRegisterValidation } from "@/utils";
@@ -14,26 +14,28 @@ const ServerAdminValidate: React.FC = () => {
     const [validateResult, setValidateResult] = useState<"success" | "error" | "info" | "warning" | undefined>("error");
     const navigate = useNavigate();
 
+    // StrictMode replays effects; share the one-time verification request across replays.
+    const verification = useRef<{ key: string; promise: ReturnType<typeof fetchServerAdminRegisterValidation> } | null>(null);
     useEffect(() => {
-        console.log("Username: ", username);
-        console.log("OTP: ", otp);
-
-        const data2Push = {
-            email: username,
-            token: otp
+        let active = true;
+        setLoading(true);
+        setValidateResult('error');
+        if (!username || !otp) {
+            setLoading(false);
+            return;
         }
-        fetchServerAdminRegisterValidation(data2Push)
-            .then((res) => {
-                console.log("Response: ", res);
-                // 后端成功返回201(Created)，需要检查200或201
-                if (res.status === 200 || res.status === 201) {
-                    setValidateResult("success");
-                }
-                setLoading(false);
-            }).catch((err) => {
-                console.log("Error: ", err);
-                setLoading(false);
-            })
+        const key = JSON.stringify([username, otp]);
+        if (verification.current?.key !== key) {
+            verification.current = { key, promise: fetchServerAdminRegisterValidation({ email: username, token: otp }) };
+        }
+        verification.current.promise.then(res => {
+            if (active) setValidateResult(res.status === 200 || res.status === 201 ? 'success' : 'error');
+        }).catch(() => {
+            if (active) setValidateResult('error');
+        }).finally(() => {
+            if (active) setLoading(false);
+        });
+        return () => { active = false; };
     }, [otp, username]);
 
 
@@ -46,7 +48,7 @@ const ServerAdminValidate: React.FC = () => {
                 title={validateResult === "success" ? messages.registerSuccess: messages.registerFailed}
                 subTitle={validateResult === "success" ? messages.registerSuccessVerificationTips: messages.registerFailedTips}
                 extra={[
-                    <Button type="primary" onClick={() => navigate("/server/login")}>
+                    <Button key="login" type="primary" onClick={() => navigate("/server/login")}>
                         {messages.backToLogin}
                     </Button>
                 ]}

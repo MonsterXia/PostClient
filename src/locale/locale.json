@@ -96,16 +96,16 @@
         "zh": "注册待验证，请在30分钟内检查您的邮箱以激活您的账号。"
     },
     "registerSuccessVerificationTips": {
-        "en": "Register Success, please contact the supervisor to activate your account.",
-        "zh": "注册成功，请联系管理员激活您的账号。"
+        "en": "Your email is verified. You can now sign in.",
+        "zh": "邮箱验证完成，您现在可以登录。"
     },
     "registerFailed": {
         "en": "Register Failed",
         "zh": "注册失败"
     },
     "registerFailedTips": {
-        "en": "Register Failed, your email is not in the stage of verification.",
-        "zh": "注册失败，您的邮箱不在验证阶段。"
+        "en": "Verification failed. The link may be invalid, expired or already used.",
+        "zh": "验证失败，链接可能无效、已过期或已使用。"
     },
     "userNotExistOrPasswordError": {
         "en": "User not exist or password error",
@@ -252,11 +252,23 @@
         "zh": "密码必须包含至少一个小写字母"
     },
     "passwordMustContainSpecialChar": {
-        "en": "Password must contain at least one special character",
-        "zh": "密码必须包含至少一个特殊字符"
+        "en": "Password must include a special character: !@#$%^&*(),.?\":{}|<>",
+        "zh": "密码必须包含特殊字符：!@#$%^&*(),.?\":{}|<>"
     },
     "passwordRequirements": {
         "en": "Must contain uppercase, lowercase, and special character",
         "zh": "必须包含大写字母、小写字母和特殊字符"
+    },
+    "retry": {
+        "en": "Retry",
+        "zh": "重试"
+    },
+    "signOut": {
+        "en": "Sign out",
+        "zh": "退出登录"
+    },
+    "passwordTooLong": {
+        "en": "Password must not exceed 72 UTF-8 bytes.",
+        "zh": "密码不能超过 72 个 UTF-8 字节。"
     }
 }

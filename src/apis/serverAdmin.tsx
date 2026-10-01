@@ -1,65 +1,27 @@
-import { request } from '@/utils'
+import { request } from '@/utils/request';
+import type { AdminCredentials, ApiResponse, PostAdmin, RegistrationVerification } from '@/types/admin';
 
+export const usernameCheckAPI = (data: { email: string }) =>
+    request.post<ApiResponse<boolean>>('/post/admin/register/valid-email', data);
 
-export function usernameCheckAPI(data: unknown) {
-    return request({
-        url: "/post/admin/register/valid-email",
-        method: "post",
-        data: data,
-    });
-}
+export const serverAdminRegisterAPI = (data: AdminCredentials) =>
+    request.post<ApiResponse<null>>('/post/admin/register/init', data);
 
-export function serverAdminRegisterAPI(data: unknown) {
-    return request({
-        url: "/post/admin/register/init",
-        method: "post",
-        data: data,
-    });
-}
+export const serverAdminRegisterValidationAPI = (data: RegistrationVerification) =>
+    request.post<ApiResponse<PostAdmin>>('/post/admin/register/validate', data);
 
-export function serverAdminRegisterValidationAPI(data: unknown) {
-    return request({
-        url: "/post/admin/register/validate",
-        method: "post",
-        data: data,
-    });
-}
+export const serverAdminLoginAPI = (data: AdminCredentials) =>
+    request.post<ApiResponse<PostAdmin>>('/post/admin/login', data);
 
-export function serverAdminLoginAPI(data: unknown) {
-    return request({
-        url: "/post/admin/login",
-        method: "post",
-        data: data,
-        withCredentials: true,
-    });
-}
+export const serverAdminLogoutAPI = () =>
+    request.post<ApiResponse<null>>('/post/admin/logout');
 
+export const getCurrentAdminAPI = () =>
+    request.get<ApiResponse<PostAdmin>>('/post/admin/current');
 
-export function serverAdminLogoutAPI() {
-    return request({
-        url: "/post/admin/logout",
-        method: "post",
-    });
-}
+// Binding is resolved from both account cookies by the server.
+export const adminBindingAPI = () =>
+    request.post<ApiResponse<PostAdmin>>('/post/admin/binding');
 
-export function getCurrentAdminAPI() {
-    return request({
-        url: "/post/admin/current",
-        method: "get",
-    });
-}
-
-export function adminBindingAPI(data: unknown) {
-    return request({
-        url: "/post/admin/binding",
-        method: "post",
-        data: data,
-    });
-}
-
-export function adminUnbindingAPI() {
-    return request({
-        url: "/post/admin/binding",
-        method: "delete",
-    });
-}
+export const adminUnbindingAPI = () =>
+    request.delete<ApiResponse<PostAdmin>>('/post/admin/binding');
