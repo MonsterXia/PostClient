@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { ConfigProvider, Layout, Menu, theme, Space, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { Outlet, useNavigate, useLocation } from 'react-router';
+import { Outlet, useNavigate } from 'react-router';
 import './Root.css';
 
 import type { MenuProps } from 'antd';
@@ -44,7 +44,6 @@ const Root: React.FC = () => {
 
 
     const navigate = useNavigate();
-    const location = useLocation();
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
@@ -53,35 +52,14 @@ const Root: React.FC = () => {
 
     const menuItems = [
         {
-            key: "/",
-            label: messages.aboutPost,
-        },
-        {
-            key: "rules",
+            key: "/rules",
             label: messages.rule,
         },
-        {
-            key: "server",
-            label: messages.server,
-        },
-    ]
+    ];
 
-    const handleMenuClick: MenuProps['onClick'] = (e) => {
-        console.log(e.key);
-        switch (e.key) {
-            case "/":
-                navigate("/");
-                break;
-            case "rules":
-                navigate("/rules");
-                break;
-            case "server":
-                navigate("/server");
-                break;
-            default:
-                break;
-        }
-    }
+    const handleMenuClick: MenuProps['onClick'] = () => {
+        navigate("/rules");
+    };
 
     return (
         <ConfigProvider
@@ -94,18 +72,11 @@ const Root: React.FC = () => {
                     <img className='root-logo' src="/post.svg" alt="logo" />
                     <Menu
                         mode="horizontal"
-                        defaultSelectedKeys={["About Us"]}
-                        selectedKeys={[location.pathname.split("/")[1] === "" ? "/" : location.pathname.split("/")[1]]}
+                        selectedKeys={["/rules"]}
                         items={menuItems}
                         className="root-layout-header-menu"
                         onClick={handleMenuClick}
                     />
-                    {/* <SignedOut>
-                        <SignInButton/>
-                    </SignedOut>
-                    <SignedIn>
-                        <UserButton />
-                    </SignedIn> */}
                 </Header>
                 <Content className='root-layout-content'>
                     <div
