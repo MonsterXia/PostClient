@@ -5,22 +5,27 @@
     border-radius: 12px;
     box-shadow: 0 4px 24px #263f2e04;
     font-size: 15px;
-    line-height: 1.95;
+    line-height: 1.7;
     overflow-wrap: anywhere;
 }
 .server-rules :is(h1, h2, h3, h4, h5, h6) { color: #233b30; line-height: 1.5; scroll-margin-top: 28px; }
 .server-rules h1 { font-size: 30px; letter-spacing: -.035em; font-weight: 700; margin: 0 0 28px; }
 .server-rules h1:not(:first-child) { margin-top: 60px; padding-top: 30px; border-top: 1px solid #dce5d9; }
-.server-rules h2 { font-size: 23px; margin: 48px 0 24px; padding-bottom: 14px; border-bottom: 1px solid #e4e9df; }
-.server-rules h3 { font-size: 17px; font-weight: 650; margin: 28px 0 12px; }
-.server-rules :is(h4, h5, h6) { font-size: 16px; margin: 24px 0 10px; }
-.server-rules p { margin: 12px 0 18px; }
-.server-rules :is(ul, ol) { padding-left: 1.5em; margin: 14px 0 22px; }
-.server-rules li { padding-left: 4px; margin: 9px 0; }
+.server-rules h2 { font-size: 23px; margin: 32px 0 14px; padding-bottom: 10px; border-bottom: 1px solid #e4e9df; }
+.server-rules h3 { font-size: 17px; font-weight: 650; margin: 20px 0 8px; }
+.server-rules :is(h4, h5, h6) { font-size: 16px; margin: 16px 0 8px; }
+.server-rules p { margin: 8px 0; }
+.server-rules :is(ul, ol) { padding-left: 1.5em; margin: 8px 0 12px; }
+.server-rules li { padding-left: 4px; margin: 4px 0; }
+/* Loose Markdown lists wrap items in paragraphs; keep their spacing local. */
+.server-rules li > p { margin: 4px 0; }
+.server-rules li > :is(ul, ol) { margin: 6px 0; }
+.server-rules li > :first-child { margin-top: 0; }
+.server-rules li > :last-child { margin-bottom: 0; }
 .server-rules li::marker { color: #819685; }
 .server-rules a { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: #bacfc2; }
 .server-rules a:hover { text-decoration-color: currentColor; }
-.rules-toc { margin: 0 0 36px; border: 1px solid #dce6da; border-radius: 8px; background: #f4f7ef; }
+.rules-toc { margin: 0 0 24px; border: 1px solid #dce6da; border-radius: 8px; background: #f4f7ef; }
 .rules-toc summary { padding: 16px 20px; cursor: pointer; color: #345c47; font-size: 14px; font-weight: 600; }
 .rules-toc summary::marker { color: #6b9176; }
 .rules-toc summary span { margin-left: 8px; }
@@ -42,9 +47,9 @@
 .server-rules :is(th, td) { padding: 10px 16px; border: 1px solid #dce5d9; }
 .server-rules img { max-width: 100%; height: auto; }
 @media (max-width: 600px) {
-    .server-rules { padding: 28px 22px; border-radius: 10px; font-size: 14px; line-height: 1.9; }
+    .server-rules { padding: 28px 22px; border-radius: 10px; font-size: 14px; line-height: 1.7; }
     .server-rules h1 { font-size: 25px; line-height: 1.5; margin-bottom: 24px; }
-    .server-rules h2 { font-size: 21px; margin-top: 36px; }
+    .server-rules h2 { font-size: 21px; margin-top: 28px; }
     .server-rules h3 { font-size: 16px; }
     .rules-toc summary { padding: 13px 16px; }
     .server-rules .toc-list { padding: 12px 16px 18px; }
