@@ -27,16 +27,10 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ConfigProvider
       theme={{
-        components: {
-          Layout: {
-            headerBg: '#13f0c0'
-          },
-          Menu: {
-            itemBorderRadius: 20,
-            itemBg: '#13f0c0',
-            popupBg: '#13f0c0',
-            itemColor: '#ffffff',
-          },
+        token: {
+          colorPrimary: '#347864',
+          borderRadius: 8,
+          fontFamily: 'inherit',
         },
       }}
     >
