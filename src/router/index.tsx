@@ -1,13 +1,6 @@
-import Fallback from "@/pages/fallback/fallback";
-import TestComponent from "@/pages/test/test";
 import Root from "@/pages/root/Root";
 import ServerRules from "@/pages/rules/ServerRules";
-import { createBrowserRouter } from "react-router";
-import ServerIndex from "@/pages/server/ServerIndexPage"
-import ServerAdminLogin from "@/pages/server/ServerAdminLogin";
-import { AuthRoute } from "@/components/ServerAuth";
-import ServerAdminValidate from "@/pages/server/ServerAdminValidate";
-import ServerRegisterSuccessfulPage from "@/pages/server/ServerRegisterSuccessfulPage";
+import { createBrowserRouter, Navigate } from "react-router";
 
 const router = createBrowserRouter([
     {
@@ -16,38 +9,18 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <>Home</>,
+                element: <Navigate to="/rules" replace />,
             },
             {
                 path: "rules",
-                element: <ServerRules />
-            },
-            {
-                path: "server/login",
-                element: <ServerAdminLogin  />,
-            },
-            {
-                path: "server/register/temperary",
-                element: <ServerRegisterSuccessfulPage  />,
-            },
-            {
-                path: "server/register/username/:username/:otp",
-                element: <ServerAdminValidate  />,
-            },
-            {
-                path: "server/",
-                element: <AuthRoute><ServerIndex /></AuthRoute>,
-            },
-            {
-                path: "test",
-                element: <TestComponent />,
+                element: <ServerRules />,
             },
             {
                 path: "*",
-                element: <Fallback />
-            }
+                element: <Navigate to="/rules" replace />,
+            },
         ],
     },
-])
+]);
 
-export default router
+export default router;

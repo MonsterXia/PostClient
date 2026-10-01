@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ReactMarkdown from "react-markdown"
+import ReactMarkdown, { type Components } from "react-markdown"
 import rehypeHighlight from "rehype-highlight"
 import rehypeSlug from "rehype-slug";
 import remarkMath from "remark-math";
@@ -22,10 +22,10 @@ function remarkTocPlugin() {
 
                 if (result.map && parent.type === "paragraph") {
                     // Mark the TOC list so CSS can target it
-                    (result.map as any).data = {
-                        ...(result.map as any).data,
+                    result.map.data = {
+                        ...result.map.data,
                         hProperties: {
-                            ...(result.map as any).data?.hProperties,
+                            ...result.map.data?.hProperties,
                             className: "toc-list",
                         },
                     };
@@ -55,11 +55,11 @@ function remarkRemovePageBreak() {
     };
 }
 
-const components = {
-    pre: ({ children, ...props }: any) => {
+const components: Components = {
+    pre: ({ children, ...props }) => {
         return <pre className="code-block" {...props}>{children}</pre>;
     },
-    code: ({ children, className, ...props }: any) => {
+    code: ({ children, className, ...props }) => {
         const isInline = !className;
         if (isInline) {
             return <code className="inline-code" {...props}>{children}</code>;
