@@ -18,7 +18,7 @@
 
 [`ServerRules.tsx`](../src/pages/rules/ServerRules.tsx) 使用 `loading`、`ready`、`error` 三种互斥状态：
 
-1. 挂载后请求 `/rules/rule.md`，初始显示中英文加载提示。
+1. 挂载后请求 `/rules/rule.md`，初始显示与标题、目录和段落布局对应的骨架屏，不显示加载文案。
 2. 检查 `response.ok`，读取正文，并拒绝空白文本以及以 `<!doctype html` 或 `<html` 开头的常见 HTML 回退响应。
 3. 根据正文加载渲染插件。插件加载完成后进入 `ready`，一次性展示正文。
 4. 请求、响应验证或插件加载失败时进入 `error`，显示提示和重试按钮，并通过 `console.error` 记录错误。
@@ -62,7 +62,7 @@
 
 切换语言会同步 `document.title` 和 HTML 的 `lang`。正文 `article` 始终标记为 `zh-CN`，不会翻译规则内容。
 
-键盘可聚焦“跳至正文”链接，将焦点移至 `main#main-content`。正文容器不显示整圈焦点轮廓，交互控件保留 `:focus-visible` 提示。加载状态使用 `role="status"` 与 `aria-busy`，错误使用 `role="alert"`。
+键盘可聚焦“跳至正文”链接，将焦点移至 `main#main-content`。正文容器不显示整圈焦点轮廓，交互控件保留 `:focus-visible` 提示。骨架屏使用 `role="status"`、中英文 `aria-label` 与正文的 `aria-busy` 提供读屏状态，装饰块对读屏隐藏；系统偏好减少动态效果时关闭动画，打印时隐藏骨架屏，错误使用 `role="alert"`。
 
 ## 样式与构建边界
 

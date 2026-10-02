@@ -67,7 +67,18 @@ export default function ServerRules() {
 
     return (
         <article className="server-rules" lang="zh-CN" aria-busy={state.status === 'loading'}>
-            {state.status === 'loading' && <p role="status">正在加载规则… / Loading rules…</p>}
+            {state.status === 'loading' && <div className="rules-skeleton" role="status" aria-label="规则内容加载中 / Loading rules">
+                <div aria-hidden="true">
+                    <div className="skeleton-bar skeleton-title" />
+                    <div className="skeleton-bar skeleton-toc" />
+                    {[0, 1, 2].map((section) => <div className="skeleton-section" key={section}>
+                        <div className="skeleton-bar skeleton-heading" />
+                        <div className="skeleton-bar skeleton-line" />
+                        <div className="skeleton-bar skeleton-line" />
+                        <div className="skeleton-bar skeleton-line skeleton-short" />
+                    </div>)}
+                </div>
+            </div>}
             {state.status === 'error' && <div role="alert">
                 <p>规则加载失败，请检查网络后重试。 / Unable to load rules.</p>
                 <button className="rules-retry" type="button" onClick={() => {

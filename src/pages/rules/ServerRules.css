@@ -62,3 +62,20 @@
 }
 .rules-retry { padding: 10px 18px; border: 1px solid #347864; border-radius: 8px; background: #347864; color: white; cursor: pointer; }
 .server-rules .katex-display { overflow-x: auto; overflow-y: hidden; padding: 4px 0; }
+
+.rules-skeleton { min-height: 600px; }
+.skeleton-bar { border-radius: 5px; background: #e8ede4; animation: skeleton-pulse 1.8s ease-in-out infinite; }
+.skeleton-title { width: 72%; height: 40px; margin-bottom: 28px; }
+.skeleton-toc { height: 58px; margin-bottom: 36px; border-radius: 8px; }
+.skeleton-section { margin-bottom: 32px; }
+.skeleton-heading { width: 28%; height: 26px; margin-bottom: 20px; }
+.skeleton-line { height: 14px; margin-bottom: 12px; }
+.skeleton-short { width: 76%; }
+@keyframes skeleton-pulse { 50% { opacity: .5; } }
+@media (max-width: 600px) {
+    .skeleton-title { width: 90%; height: 68px; margin-bottom: 24px; }
+    .skeleton-toc { height: 50px; }
+    .skeleton-heading { width: 42%; }
+}
+@media (prefers-reduced-motion: reduce) { .skeleton-bar { animation: none; } }
+@media print { .rules-skeleton { display: none; } }
