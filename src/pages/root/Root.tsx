@@ -1,58 +1,46 @@
-import { useEffect } from 'react';
-import { ConfigProvider, Dropdown } from 'antd';
-import { DownOutlined, GlobalOutlined } from '@ant-design/icons';
+import { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
-import { setLanguage } from '@/store/modules/messages';
-import type { RootState } from '@/store';
+import translations from '@/locale/locale.json';
 import './Root.css';
 
-function Root() {
-    const dispatch = useDispatch();
-    const { messages, locale } = useSelector((state: RootState) => state.language);
+type Language = 'zh' | 'en';
+
+export default function Root() {
+    const [language, setLanguage] = useState<Language>(() => navigator.language.startsWith('zh') ? 'zh' : 'en');
+    const message = (key: keyof typeof translations) => translations[key][language];
 
     useEffect(() => {
-        dispatch(setLanguage(navigator.language.startsWith('zh') ? 'zh' : 'en'));
-    }, [dispatch]);
+        document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
+        document.title = `${translations.rule[language]} · Post`;
+    }, [language]);
 
     return (
-        <ConfigProvider locale={locale}>
-            <div className="root-layout">
-                <header className="root-layout-header">
-                    <div className="root-header-inner">
-                        <Link className="root-brand" to="/rules" aria-label={messages.post}>
-                            <img className="root-logo" src="/post.svg" alt="" />
-                            <span>{messages.post}<small>POST COMMUNITY</small></span>
-                        </Link>
-                        <div className="root-header-actions">
-                            <Link className="root-rules-link" to="/rules" aria-current="page">{messages.rule}</Link>
-                            <Dropdown
-                                trigger={['click']}
-                                menu={{
-                                    items: [{ key: 'zh', label: '中文' }, { key: 'en', label: 'English' }],
-                                    onClick: ({ key }) => dispatch(setLanguage(key)),
-                                }}
-                            >
-                                <button className="root-language" type="button" aria-label={messages.changeLanguage}>
-                                    <GlobalOutlined />
-                                    <span>{locale.locale === 'zh-cn' ? '中文' : 'English'}</span>
-                                    <DownOutlined className="root-language-chevron" />
-                                </button>
-                            </Dropdown>
-                        </div>
-                    </div>
-                </header>
-                <main className="root-layout-content">
-                    <div className="root-document-label">POST / COMMUNITY GUIDELINES</div>
-                    <Outlet />
-                </main>
-                <footer className="root-layout-footer">
-                    <span>{messages.post} © 2019–{new Date().getFullYear()}</span>
-                    <span>{messages.allRightsReserved}</span>
-                </footer>
-            </div>
-        </ConfigProvider>
+        <div className="root-layout">
+            <a className="skip-link" href="#main-content">{language === 'zh' ? '跳至正文' : 'Skip to content'}</a>
+            <header className="root-layout-header">
+                <div className="root-header-inner">
+                    <Link className="root-brand" to="/rules" aria-label={message('post')}>
+                        <img className="root-logo" src="/post.svg" alt="" width="50" height="50" />
+                        <span>{message('post')}<small>POST COMMUNITY</small></span>
+                    </Link>
+                    <nav className="root-header-actions" aria-label={language === 'zh' ? '主导航' : 'Main navigation'}>
+                        <Link className="root-rules-link" to="/rules" aria-current="page">{message('rule')}</Link>
+                        <select className="root-language" aria-label={message('changeLanguage')} value={language}
+                            onChange={(event) => setLanguage(event.target.value as Language)}>
+                            <option value="zh">中文</option>
+                            <option value="en">English</option>
+                        </select>
+                    </nav>
+                </div>
+            </header>
+            <main id="main-content" tabIndex={-1} className="root-layout-content">
+                <div className="root-document-label">POST / COMMUNITY GUIDELINES</div>
+                <Outlet />
+            </main>
+            <footer className="root-layout-footer">
+                <span>{message('post')} © 2019–{new Date().getFullYear()}</span>
+                <span>{message('allRightsReserved')}</span>
+            </footer>
+        </div>
     );
 }
-
-export default Root;
